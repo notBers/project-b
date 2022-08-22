@@ -1,13 +1,10 @@
 import logo from './logo.svg';
-import './App.css';
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+
+import { BrowserRouter, Routes, Route, Link, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
+import Navbar from './Navbarandwrongforms';
+import './Navbarandwrongforms.css';
 
-
-
-function Navbar(){
-  return('hola');
-}
 
 function Login(){
   return (
@@ -66,11 +63,7 @@ function Signup(){
 function App() {
   return (
     <div className="App">
-      <Routes>
-        <Route exact path="/" element={<Login />} />
-        <Route exact path="Login" element={<Login />} />
-        <Route exact path="Signup" element={<Signup />} />
-      </Routes>
+      <Navbar></Navbar>
     </div>
   );
 }
