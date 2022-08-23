@@ -1,10 +1,8 @@
 import logo from './logo.svg';
-
+import './App.css';
 import { BrowserRouter, Routes, Route, Link, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
-import Navbar from './Navbarandwrongforms';
-import './Navbarandwrongforms.css';
-
+import Navbar  from './Navbarandwrongforms';
 
 function Login(){
   return (
@@ -30,7 +28,7 @@ function Login(){
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 function Signup(){
@@ -51,19 +49,21 @@ function Signup(){
           <input type="submit" className="fadeIn fourth login" value="LogIn"/>
         </form>
 
-        <div id='fortFooter'>
-          <a class="underlineHover" href='#'>Forgot password</a>
-        </div>
       </div>
     </div>
-  )
+  );
 }
 
 
 function App() {
   return (
     <div className="App">
-      <Navbar></Navbar>
+      <Routes>
+        <Route exact path="/" element={<Login />} />
+        <Route exact path="Login" element={<Login />} />
+        <Route exact path="Signup" element={<Signup />} />
+        <Route exact path="Navbar" element={<Navbar />} />
+      </Routes>
     </div>
   );
 }
