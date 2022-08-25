@@ -1,8 +1,9 @@
-import logo from './logo.svg';
 import './App.css';
-import { BrowserRouter, Routes, Route, Link, useNavigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Link, Navigate} from "react-router-dom";
 import React, { useState } from "react";
-import Navbar  from './Navbarandwrongforms';
+import Home from './Home';
+import { Tools } from './Home';
+import { Search } from './Tools';
 
 function Login(){
   return (
@@ -59,10 +60,14 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route exact path="/" element={<Login />} />
-        <Route exact path="Login" element={<Login />} />
-        <Route exact path="Signup" element={<Signup />} />
-        <Route exact path="Navbar" element={<Navbar />} />
+        <Route path="/" element={<Navigate to='Home' />} />
+        <Route path="Login" element={<Login />} />
+        <Route path="Signup" element={<Signup />} />
+        <Route path="/Home/Tools/Search" element={<Search signin={true}/>}/>
+        <Route path="/Home/Tools" element={<Tools signin={true}/>}/>
+        <Route path="Home" element={<Home signin={true}/>}/>
+       
+        
       </Routes>
     </div>
   );

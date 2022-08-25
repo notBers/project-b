@@ -1,36 +1,36 @@
-import { BrowserRouter, Routes, Route, Link, useNavigate } from "react-router-dom";
+import './App.css';
+import { BrowserRouter, Routes, Route, Link, Navigate} from "react-router-dom";
 import React, { useState } from "react";
+import Navbar from './Navbarandwrongforms';
 
+var back = '<-'
 
-function Navbar(){
-  return (
-  <body>
-   <header>
-    <section id="home">
+function ToolsNav(){
+    return(
+        <body>
         <header>
-            <nav class="nav">
-              <a href = '/account' class="logo">Account</a>
-
-              <div class="hamburger">
-                <span class="line"></span>
-                <span class="line"></span>
-                <span class="line"></span>
-              </div>
-
-              <div class="nav__link hide">
-                <Link to={'Dashboard'}>Dashboard</Link>
-                <Link to={'Tools'}>Tools</Link>
-                <Link to={'Classes'}>Classes</Link>
-              </div>
-            </nav>
-          </header>
-
-
-    </section>
-
-    </header>
-
-    <style>
+         <section id="home">
+             <header>
+                 <nav class="nav">
+                   <Link to = '/Home' class="logo">{back}</Link>
+     
+                   <div class="hamburger">
+                     <span class="line"></span>
+                     <span class="line"></span>
+                     <span class="line"></span>
+                   </div>
+     
+                   <div class="nav__link hide">
+                     <Link to={'Search'}>Search</Link>
+                     <Link to={'Math'}>Math</Link>
+                     <Link to={'Bibliographies'}>Bibliographies</Link>
+                     <Link to={'Traductor'}>Traductor</Link>
+                     <Link to={'Dictionaries'}>Dictionaries</Link>
+                     <Link to={'Text corrector'}>Text corrector</Link>
+                   </div>
+                 </nav>
+               </header>
+               <style>
       { `
 @import url('https://fonts.googleapis.com/css2?family=Lobster&family=Pattaya&family=Poppins:wght@200;400;600&family=Roboto&display=swap');
 *{
@@ -145,12 +145,6 @@ body{
 
           .hamburger {
             display: none;
-
-
-          }
-
-          .hide{
-            display: inline;
           }
       
           
@@ -160,8 +154,45 @@ body{
 
      `}
     </style>
-  </body>
-  );
+     
+         </section>
+     
+         </header>
+     
+
+       </body>
+    )
 }
 
-export default Navbar;
+
+export function Tools(props){
+    if(props.signin == false){
+        return <Navigate to="/Login" />;
+    }else{
+        return(
+            <div >
+                <ToolsNav/>
+
+            </div>
+        )
+        } 
+}        
+
+
+
+
+
+function Home(props){
+    if(props.signin == false){
+        return <Navigate to="/Login" />;
+    }else{
+        return(
+            <div >
+                <Navbar/>
+
+            </div>
+        )
+        } 
+}   
+
+export default Home;
