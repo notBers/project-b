@@ -148,11 +148,6 @@ body{
 
 
           }
-
-          .hide{
-            display: inline;
-          }
-      
           
         }
 

@@ -2,6 +2,7 @@ import './App.css';
 import { BrowserRouter, Routes, Route, Link, Navigate} from "react-router-dom";
 import React, { useState } from "react";
 import Navbar from './Navbarandwrongforms';
+import BasicSearch from './SERPAPI.JS';
 
 var back = '<-'
 
@@ -19,12 +20,14 @@ export function Search(){
                <div >
                 
                 <div id='option-input'>
-                    <input type='text' id='input' value='Enter your search'></input>
+                    <form id ='form'>
+                    <h1>search for someting</h1>
+                    <input type='text' id='input' defaultValue='Type something' ></input>
                     <div>
-                        <h3>.Org</h3><input type='checkbox' class ='checkbox'/>
+                        <h3>Author</h3><input type='checkbox' class ='checkbox'/>
                         <h3>.Edu</h3><input type='checkbox' class ='checkbox'/>
-                        <h3>Results</h3><input type='number' class ='number'/>
                     </div>
+                    </form>
                 </div>
                 <div className='container'>
                     <div className='Search'>
