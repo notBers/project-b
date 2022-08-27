@@ -2,7 +2,7 @@ const SerpApi = require('google-search-results-nodejs');
 const search = new SerpApi.GoogleSearch("4f45f6a96a8a853416e71a86a3c38cb229f8a3348fc1e53780285d178db67f24");
 
 var back = '<-'
-function BasicSearch(q, ln){
+function BasicSearch(q, ln, fun){
   const params = {
     engine: "google_scholar",
     hl: ln,
