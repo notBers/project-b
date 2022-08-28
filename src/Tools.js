@@ -1,62 +1,54 @@
 import './App.css';
 import { BrowserRouter, Routes, Route, Link, Navigate} from "react-router-dom";
-import React, { useState} from "react";
+import React, { useState, useEffect} from "react";
 import Navbar from './Navbarandwrongforms';
-import BasicSearch from './SERPAPI.JS';
-import { type } from '@testing-library/user-event/dist/type';
 
 var back = '<-'
 
-export function Search(){
-
-  const [search, setSearch] = useState("");
-  const [type, setType] = useState("");
-  const [output, setOutput] = useState("");
+export  function Search(){
 
 
-  const handleSubmit = (event) => {
 
-    if(type == ""){
-      setType('Scholar')
-    }   
+  const [search, setSearch] = useState('');
+  const [type, setType] = useState('');
+  const [output, setOutput] = useState('');
 
-    if(search == ''){
-      setOutput('NO SEARCh')
-      return 0;
+  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if(!search) return;
+
+    async function fetchData(){
+      const response = await fetch('http://localhost:3000/Scholar');
+      const data = await response.json()
+      const results = data.message;
+      setOutput(results);
     }
+    fetchData();
+   }
 
-    switch(type){
-      case('Scholar'):
-        console.log('jola');
-        break;
-      case('Regular Search'):
-        console.log('');
-        break;
-      case('Cites'):
-        console.log('jola');
-        break;
-      case('Author'):
-        console.log('jola');
-        break;
-    }
-    
-  }
+
+
+
+  
+
+
   return(
         <body>
         
         <header>
              
-                 <nav class="nav">
+                 <nav className="nav">
                    <Link to = '/Home/Tools' class="logo">{back}</Link>
 
-                   <div class="logo">
+                   <div className="logo">
                       <h3 id='search'>Search</h3>
                    </div>
      
                  </nav>
                  <div id='option-input'>
                     <form id ='form' onSubmit={handleSubmit}>
-                    <input type='text' id='input' defaultValue='Search something' maxlength="100" value={search} onChange={(e) => setSearch(e.target.value)}></input>
+                    <input type='text' id='input' defaultValue='Search something' maxLength="100" value={search} onChange={(e) => setSearch(e.target.value)}></input>
                     <select name="cars" id="cars" onChange={(e) => setType(e.target.value)}>
                       <option value="Scholar" id='Scholar'>Scholar</option>
                       <option value="Regular search" id='Regular-Search'>Regular search</option>
@@ -72,11 +64,11 @@ export function Search(){
             
                 <div className='container'>
                     <h1 id = 'results'>Results</h1>
-                    <div className='Search'>
+                    
                         <div className='display'>
-                            
+                            <h1 id = 'result'>{output}</h1>
                         </div>
-                    </div>
+                    
 
                 </div>
             
@@ -154,6 +146,7 @@ body{
           margin-top: 1%;
           text-align: center;
         }
+        
 
         .container{
           position: relative;
@@ -168,7 +161,10 @@ body{
 
         .display{
           width: 90%;
+          height: 80%;
           margin: auto;
+          border: 2px solid blue;
+          text-align: center
         }
 
         body{
@@ -189,5 +185,8 @@ body{
 
        </body>
     )
+
+
+
 }
 
