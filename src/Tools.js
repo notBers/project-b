@@ -5,9 +5,7 @@ import Navbar from './Navbarandwrongforms';
 
 var back = '<-'
 
-export  function Search(){
-
-
+export function Search(){
 
   const [search, setSearch] = useState('');
   const [type, setType] = useState('');
@@ -16,22 +14,16 @@ export  function Search(){
   
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(!search) return;
+    if (!search) return;
 
-    async function fetchData(){
-      const response = await fetch('http://localhost:3000/Scholar');
-      const data = await response.json()
-      const results = data.message;
+    async function fetchData() {
+      const response = await fetch("http://localhost:3000/Scholar");
+      const data = await response.json();
+      const results = data.organic_results;
       setOutput(results);
     }
     fetchData();
-   }
-
-
-
-
-  
-
+  };
 
   return(
         <body>
@@ -87,7 +79,6 @@ body{
   background-color: #F8F8FF;
   padding-top: 0%;
 }
-
         .nav {
           display: flex;
           justify-content: space-between;
@@ -95,7 +86,6 @@ body{
           background-color: #014364;
           padding: 20px 0 20px 0
         }
-
         .logo {
           font-size: 32px;
           color: rgb(45, 182, 175);
@@ -103,7 +93,6 @@ body{
           cursor: default;
           padding-right: 50px;
         }
-
         #option-input{
             
             margin-left: 1%;
@@ -121,12 +110,10 @@ body{
           width: 110%
           margin: auto;
         }
-
         #input{
           width: 81%;
           margin: auto
         }
-
         #cars{
           width: 14.5%;
           height: 1.5699cm;
@@ -135,19 +122,16 @@ body{
           border-color: transparent;
           margin-left: .2%;
         }
-
         #submit{
           width: 95.7%;
           margin: auto;
           margin-bottom: .5%;
         }
-
         #results{
           margin-top: 1%;
           text-align: center;
         }
         
-
         .container{
           position: relative;
           background-color: white;
@@ -155,10 +139,7 @@ body{
           width: 90%;
           margin: auto;
           border-radius: 8px;
-
-
         }
-
         .display{
           width: 90%;
           height: 80%;
@@ -166,15 +147,12 @@ body{
           border: 2px solid blue;
           text-align: center
         }
-
         body{
           background-color: #D5DBFF;
           margin: auto;
           
         }
-
       }
-
      `}
     </style>
      
