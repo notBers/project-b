@@ -17,12 +17,20 @@ export function Search(){
     if (!search) return;
 
     async function fetchData() {
-      const response = await fetch("http://localhost:3000/Scholar");
+      var bodys = {engine: 'google_scholar', q: search}
+      const response = await fetch("http://localhost:3001/Scholar", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
       const data = await response.json();
-      const results = data.organic_results;
-      setOutput(results);
+      var counter = 1;
+      var res = data.map(result => {
+        var single = `(${counter}) Title : (${result.title})  |   Summary : (${result.summary})  |   Link : (${result.link})  |   cite tool : (${result.cite_tool})`
+        counter += 1;
+        return single
+      })
+      var fmap = res.map(e => <h3 className='result'>{e}</h3>);
+      setOutput(fmap);
     }
     fetchData();
+
   };
 
   return(
@@ -34,7 +42,7 @@ export function Search(){
                    <Link to = '/Home/Tools' class="logo">{back}</Link>
 
                    <div className="logo">
-                      <h3 id='search'>Search</h3>
+                      <h1 id='search'>Search</h1>
                    </div>
      
                  </nav>
@@ -58,7 +66,7 @@ export function Search(){
                     <h1 id = 'results'>Results</h1>
                     
                         <div className='display'>
-                            <h1 id = 'result'>{output}</h1>
+                            {output}
                         </div>
                     
 
@@ -105,6 +113,10 @@ body{
           
         }
         
+        .result{
+          margin: 20px
+        }
+        
         #form{
           margin-top: 1%;
           width: 110%
@@ -127,6 +139,9 @@ body{
           margin: auto;
           margin-bottom: .5%;
         }
+
+
+
         #results{
           margin-top: 1%;
           text-align: center;
@@ -144,8 +159,7 @@ body{
           width: 90%;
           height: 80%;
           margin: auto;
-          border: 2px solid blue;
-          text-align: center
+          overflow: scroll;
         }
         body{
           background-color: #D5DBFF;
