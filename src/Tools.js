@@ -8,29 +8,47 @@ var back = '<-'
 export function Search(){
 
   const [search, setSearch] = useState('');
-  const [type, setType] = useState('');
+  const [type, setType] = useState('engine=google_scholar');
   const [output, setOutput] = useState('');
 
   
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!search) return;
+    if (type == '') setType('engine=google_scholar')
 
     async function fetchData() {
-      var bodys = {engine: 'google_scholar', q: search}
+      var bodys = {engine: (type+'&'), q: search.replaceAll(' ', '+') }
       const response = await fetch("http://localhost:3001/Scholar", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
       const data = await response.json();
       var counter = 1;
-      var res = data.map(result => {
-        var single = `(${counter}) Title : (${result.title})  |   Summary : (${result.summary})  |   Link : (${result.link})  |   cite tool : (${result.cite_tool})`
-        counter += 1;
-        return single
-      })
-      var fmap = res.map(e => <h3 className='result'>{e}</h3>);
+      var res;
+      var img;
+      switch(bodys.engine){
+        case('engine=google_scholar&'):
+        
+          res = data?.map(result => {
+            var single = `(${counter}) Title : (${result.title})  |   Summary : (${result.summary})  |   Link : (${result.link})  |   cite id : (${result.cite_tool})`
+            counter += 1;
+            return(single)
+
+          })
+          var fmap = res.map(e => <h3 className='result'>{e}</h3>);
+          
+          break
+        case('tbm=isch&'):
+          res = data.map(result => {
+            counter += 1;
+            img = result.image_link
+            return(img)
+          })
+          var fmap = res.map(e => <img src={e}/>);
+          break
+      }
       setOutput(fmap);
     }
     fetchData();
-
+     
   };
 
   return(
@@ -48,12 +66,10 @@ export function Search(){
                  </nav>
                  <div id='option-input'>
                     <form id ='form' onSubmit={handleSubmit}>
-                    <input type='text' id='input' defaultValue='Search something' maxLength="100" value={search} onChange={(e) => setSearch(e.target.value)}></input>
+                    <input type='text' id='input' placeholder='Search something' maxLength="100" value={search} onChange={(e) => setSearch(e.target.value)}></input>
                     <select name="cars" id="cars" onChange={(e) => setType(e.target.value)}>
-                      <option value="Scholar" id='Scholar'>Scholar</option>
-                      <option value="Regular search" id='Regular-Search'>Regular search</option>
-                      <option value="Cites" id='Cites'>Cites</option>
-                      <option value="Author" id='Author'>Author</option>
+                      <option value="engine=google_scholar" id='Scholar'>Scholar</option>
+                      <option value="tbm=isch" id='Author'>Images</option>
                     </select>
                     <input type='submit' id='submit' value='Search'/>
                    </form>
