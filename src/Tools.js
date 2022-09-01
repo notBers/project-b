@@ -1,98 +1,39 @@
 import './App.css';
 import { BrowserRouter, Routes, Route, Link, Navigate} from "react-router-dom";
-import React, { useState, useEffect} from "react";
+import React, { useState } from "react";
 import Navbar from './Navbarandwrongforms';
 
 var back = '<-'
 
-export function Search(){
-
-  const [search, setSearch] = useState('');
-  const [type, setType] = useState('engine=google_scholar');
-  const [output, setOutput] = useState('');
-
-  
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!search) return;
-    if (type == '') setType('engine=google_scholar')
-
-    async function fetchData() {
-      var bodys = {engine: (type+'&'), q: search.replaceAll(' ', '+') }
-      const response = await fetch("http://localhost:3001/Scholar", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
-      const data = await response.json();
-      var counter = 1;
-      var res;
-      var img;
-      switch(bodys.engine){
-        case('engine=google_scholar&'):
-        
-          res = data?.map(result => {
-            var single = `(${counter}) Title : (${result.title})  |   Summary : (${result.summary})  |   Link : (${result.link})  |   cite id : (${result.cite_tool})`
-            counter += 1;
-            return(single)
-
-          })
-          var fmap = res.map(e => <h3 className='result'>{e}</h3>);
-          
-          break
-        case('tbm=isch&'):
-          res = data.map(result => {
-            counter += 1;
-            img = result.image_link
-            return(img)
-          })
-          var fmap = res.map(e => <img src={e}/>);
-          break
-      }
-      setOutput(fmap);
-    }
-    fetchData();
-     
-  };
-
-  return(
+function ToolsNav(){
+    return(
         <body>
-        
         <header>
-             
-                 <nav className="nav">
-                   <Link to = '/Home/Tools' class="logo">{back}</Link>
-
-                   <div className="logo">
-                      <h1 id='search'>Search</h1>
+         <section id="home">
+             <header>
+                 <nav class="nav">
+                   <Link to = '/Home' class="logo">{back}</Link>
+     
+                   <div class="hamburger">
+                     <span class="line"></span>
+                     <span class="line"></span>
+                     <span class="line"></span>
                    </div>
      
+                   <div class="nav__link hide">
+                     <Link to={'Search'}>Search</Link>
+                     <Link to={'Concepts'}>Concepts</Link>
+                     <Link to={'Math'}>Math</Link>
+                     <Link to={'Cites'}>Cites</Link>
+                     <Link to={'Traductor'}>Traductor</Link>
+                     <Link to={'Dictionaries'}>Dictionaries</Link>
+                     <Link to={'Text corrector'}>Text corrector</Link>
+                   </div>
                  </nav>
-                 <div id='option-input'>
-                    <form id ='form' onSubmit={handleSubmit}>
-                    <input type='text' id='input' placeholder='Search something' maxLength="100" value={search} onChange={(e) => setSearch(e.target.value)}></input>
-                    <select name="cars" id="cars" onChange={(e) => setType(e.target.value)}>
-                      <option value="engine=google_scholar" id='Scholar'>Scholar</option>
-                      <option value="tbm=isch" id='Author'>Images</option>
-                    </select>
-                    <input type='submit' id='submit' value='Search'/>
-                   </form>
-                </div>
-
-            </header>
-
-            
-                <div className='container'>
-                    <h1 id = 'results'>Results</h1>
-                    
-                        <div className='display'>
-                            {output}
-                        </div>
-                    
-
-                </div>
-            
-                
-                
-
+               </header>
                <style>
       { `
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Pattaya&family=Poppins:wght@200;400;600&family=Roboto&display=swap');
 *{
   margin: 0;
   padding: 0;
@@ -103,6 +44,14 @@ body{
   background-color: #F8F8FF;
   padding-top: 0%;
 }
+        a {
+          text-decoration: none;
+          color: rgb(45, 182, 175);
+          font-size: 1.2rem;
+          font-weight: bold;
+          text-transform: uppercase;
+        }
+
         .nav {
           display: flex;
           justify-content: space-between;
@@ -110,91 +59,141 @@ body{
           background-color: #014364;
           padding: 20px 0 20px 0
         }
+
         .logo {
           font-size: 32px;
           color: rgb(45, 182, 175);
           padding-left: 20px;
           cursor: default;
-          padding-right: 50px;
         }
-        #option-input{
-            
-            margin-left: 1%;
-            font-size: 32px;
-            color: rgb(45, 182, 175);
-            cursor: default;
-            width: 94.1% ;
-            margin-left: 5%;
-           
+
+        .hamburger {
+          padding-right: 20px;
+          cursor: pointer;
+        }
+
+        .hamburger .line {
+          display: block;
+          width: 40px;
+          height: 5px;
+          margin-bottom: 10px;
+          background-color: black;
+        }
+
+        .nav__link {
+          position: fixed;
+          width: 94%;
+          top: 5rem;
+          left: 18px;
           
-        }
-        
-        .result{
-          margin: 20px
-        }
-        
-        #form{
-          margin-top: 1%;
-          width: 110%
-          margin: auto;
-        }
-        #input{
-          width: 81%;
-          margin: auto
-        }
-        #cars{
-          width: 14.5%;
-          height: 1.5699cm;
-          margin: auto;
-          border-radius: 5px;
-          border-color: transparent;
-          margin-left: .2%;
-        }
-        #submit{
-          width: 95.7%;
-          margin: auto;
-          margin-bottom: .5%;
+          background-color: blue; 
         }
 
-
-
-        #results{
-          margin-top: 1%;
+        .nav__link a {
+          display: block;
           text-align: center;
+          padding: 10px 0;
+          background-color: rgb(1, 136, 160);
+          margin: 10px;
+          border-radius: 5px;
         }
-        
-        .container{
-          position: relative;
-          background-color: white;
-          height: 75%;
-          width: 90%;
-          margin: auto;
-          border-radius: 8px;
+
+        .nav__link a:hover {
+          border-bottom: 3px solid rgb(151, 232, 247);
+          border-radius: 7px;
+          transition: all 0.2s ease;
         }
-        .display{
-          width: 90%;
-          height: 80%;
-          margin: auto;
-          overflow: scroll;
+
+        .nav__link a:active {
+          border-bottom: 3px solid rgb(151, 232, 247);
+          background-color: rgb(175, 238, 235)
         }
-        body{
-          background-color: #D5DBFF;
-          margin: auto;
+
+        .hide {
+          display: none;
+        }
+
+        .content{
+          display: flex;
+          justify-content: center;
+          text-align: justify;
+          align-items: center;
+          margin-top: 20%;
+          color: rgb(17, 19, 19);
+          font-weight: 700;
+          font-size: 20px;
+      
+          font-family: poppins,sans-serif;
+        }
+
+        @media screen and (min-width: 600px) {
+          .nav__link {
+            display: block;
+            position: static;
+            width: auto;
+            margin-right: 20px;
+            background: none;
+      
+      
+          }
+
+          .nav__link a {
+            display: inline-block;
+            padding: 15px 20px;
+      
+      
+          }
+
+          .hamburger {
+            display: none;
+          }
+      
           
         }
+
       }
+
      `}
     </style>
      
-         
+         </section>
      
-         
+         </header>
      
 
        </body>
     )
-
-
-
 }
 
+
+export function Tools(props){
+    if(props.signin == false){
+        return <Navigate to="/Login" />;
+    }else{
+        return(
+            <div >
+                <ToolsNav/>
+
+            </div>
+        )
+        } 
+}        
+
+
+
+
+
+function Home(props){
+    if(props.signin == false){
+        return <Navigate to="/Login" />;
+    }else{
+        return(
+            <div >
+                <Navbar/>
+
+            </div>
+        )
+        } 
+}   
+
+export default Home;

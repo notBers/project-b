@@ -1,9 +1,10 @@
 import './App.css';
 import { BrowserRouter, Routes, Route, Link, Navigate} from "react-router-dom";
 import React, { useState } from "react";
-import Home from './Home';
-import { Tools } from './Home';
-import { Search } from './Tools';
+import Home from './Tools';
+import { Tools } from './Tools';
+import { Search } from './search';
+import { Bibliographies } from './cites';
 
 function Login(){
   return (
@@ -63,6 +64,7 @@ function App() {
         <Route path="/" element={<Navigate to='Home' />} />
         <Route path="Login" element={<Login />} />
         <Route path="Signup" element={<Signup />} />
+        <Route path="/Home/Tools/Cites" element={<Bibliographies signin={true}/>}/>
         <Route path="/Home/Tools/Search" element={<Search signin={true}/>}/>
         <Route path="/Home/Tools" element={<Tools signin={true}/>}/>
         <Route path="Home" element={<Home signin={true}/>}/>
