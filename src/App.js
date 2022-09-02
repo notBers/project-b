@@ -5,7 +5,7 @@ import Home from './Tools';
 import { Tools } from './Tools';
 import { Search } from './search';
 import { Bibliographies } from './cites';
-
+import {Math} from './Calc'
 function Login(){
   return (
     <div className= "wrapper fadeInDown">
@@ -64,6 +64,7 @@ function App() {
         <Route path="/" element={<Navigate to='Home' />} />
         <Route path="Login" element={<Login />} />
         <Route path="Signup" element={<Signup />} />
+        <Route path="/Home/Tools/Math" element={<Math signin={true}/>}/>
         <Route path="/Home/Tools/Cites" element={<Bibliographies signin={true}/>}/>
         <Route path="/Home/Tools/Search" element={<Search signin={true}/>}/>
         <Route path="/Home/Tools" element={<Tools signin={true}/>}/>

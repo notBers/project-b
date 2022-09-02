@@ -1,40 +1,28 @@
+import {atan2, chain, derivative, e, evaluate, log, pi, pow, round, simplify, sqrt, parse, toString } from 'mathjs'
+
 import './App.css';
 import { Link} from "react-router-dom";
 import React, { useState} from "react";
 
+
 var back = '<-'
 
-export function Bibliographies(){
+export function Math(){
     const [search, setSearch] = useState('');
     const [output, setOutput] = useState('');
-  
+    const[type, setType] = useState('Simplify')
     
     const handleSubmit = (e) => {
       e.preventDefault();
       if (!search) return;
-  
-      async function fetchData() {
-        var bodys = {engine: 'engine=google_scholar_cite', q: search }
-        const response = await fetch("http://localhost:3001/Cite", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
-        const data = await response.json();
-        var res;
-        var fmap;
-        if(data[1].format != ''){
-            res = data?.map(result => {
-                var single = `( Format : ${result.format}  |   Cite: ${result.cite}`
-                return(single)
-    
-              })
-              fmap = res.map(e => <h3 className='result'>{e}</h3>);
-              setOutput(fmap);
-        }else{
-          res = `error: unvalid id`  
-          fmap = <h3 className='result'>{res}</h3>
-          setOutput(fmap);
-        }
-        
+
+      switch(type){
+        case('Simplify'):
+          setOutput(simplify(search).toString()) 
+      
+        case('Evaluation'):
+          setOutput(evaluate(search))
       }
-      fetchData();
        
     };
   
@@ -47,29 +35,25 @@ export function Bibliographies(){
                      <Link to = '/Home/Tools' class="logo">{back}</Link>
   
                      <div className="logo">
-                        <h1 id='search'>Cites</h1>
+                        <h1 id='search'>Math</h1>
                      </div>
        
                    </nav>
                    <div id='option-input'>
                       <form id ='form' onSubmit={handleSubmit}>
-                      <input type='text' id='input' placeholder='Write the bibliography id here' maxLength="100" value={search} onChange={(e) => setSearch(e.target.value)}></input>
+                      <input type='text' id='input' placeholder='Operation here' maxLength="100" value={search} onChange={(e) => setSearch(e.target.value)}></input>
+                      <select name="cars" id="cars" onChange={(e) => setType(e.target.value)}>
+                        <option value="Evaluation" id='Evaluation'>Evaluation</option>
+                        <option value="Simplify" id='Simplify'>Simplify</option>
+                        <option value="Linear equations" id='Linear equations'>Linear equations</option>
+                      </select>
+                      <div id='input'>{output}</div>
                       <input type='submit' id='submit' value='Search'/>
                      </form>
                   </div>
   
               </header>
   
-              
-                  <div className='container'>
-                      <h1 id = 'results'>Results</h1>
-                      
-                          <div className='display'>
-                              {output}
-                          </div>
-                      
-  
-                  </div>
               
               <style>
         { `
@@ -119,8 +103,9 @@ export function Bibliographies(){
             margin: auto;
           }
           #input{
-            width: 95.7%;
-            margin: auto
+            width: 81%;
+            margin: auto;
+            text-align: center;
           }
           #cars{
             width: 14.5%;

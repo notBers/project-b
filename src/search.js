@@ -28,7 +28,7 @@ export function Search(){
         case('engine=google_scholar&'):
         
           res = data?.map(result => {
-            var single = `(${counter}) Title : (${result.title})  |   Summary : (${result.summary})  |   Link : (${result.link})  |   bibliography id : (${result.cite_tool})`
+            var single = `(${counter}) Title : (${result.title})  |   Summary : (${result.summary})  |   Link : (${result.link})  |   Cite id : (${result.cite_tool})`
             counter += 1;
             return(single)
 
@@ -138,6 +138,7 @@ body{
         #input{
           width: 81%;
           margin: auto
+
         }
         #cars{
           width: 14.5%;

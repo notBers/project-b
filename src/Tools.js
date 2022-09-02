@@ -1,7 +1,7 @@
 import './App.css';
 import { BrowserRouter, Routes, Route, Link, Navigate} from "react-router-dom";
 import React, { useState } from "react";
-import Navbar from './Navbarandwrongforms';
+import Navbar from './Home';
 
 var back = '<-'
 
