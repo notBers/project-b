@@ -1,5 +1,4 @@
 import {atan2, chain, derivative, e, evaluate, log, pi, pow, round, simplify, sqrt, parse, toString } from 'mathjs'
-
 import './App.css';
 import { Link} from "react-router-dom";
 import React, { useState} from "react";

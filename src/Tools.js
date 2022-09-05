@@ -25,7 +25,7 @@ function ToolsNav(){
                      <Link to={'Concepts'}>Concepts</Link>
                      <Link to={'Math'}>Math</Link>
                      <Link to={'Cites'}>Cites</Link>
-                     <Link to={'Traductor'}>Traductor</Link>
+                     <Link to={'Translator'}>Translator</Link>
                      <Link to={'Dictionaries'}>Dictionaries</Link>
                      <Link to={'Text corrector'}>Text corrector</Link>
                    </div>
