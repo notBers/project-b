@@ -6,17 +6,17 @@ var back = '<-'
 
 export function Traductor(){
     const [search, setSearch] = useState('');
-    const [output, setOutput] = useState('translation');
+    const [output, setOutput] = useState('Translation');
     
 
     const handleSubmit = (e) => {
-      console.log('si')
+      if (!search) return;
 
       async function fetchData() {
-        const response = await fetch(`https://api.mymemory.translated.net/get?q=${search}!&langpair=en|it`);
-        
+        const response = await fetch(`https://api.mymemory.translated.net/get?q=${search}!&langpair=en|it&key=e7556aa26e5a2d591e61`);
         const data = await response.json();
-        setOutput(data);
+        const translation = data.responseData.translatedText
+        setOutput(translation);
       }
       fetchData();
     }
@@ -27,7 +27,7 @@ export function Traductor(){
           <header>
                
                    <nav className="nav">
-                     <Link to = '/Home/Tools' class="logo">{back}</Link>
+                     <Link to = '/Home/Tools' className="logo">{back}</Link>
   
                      <div className="logo">
                         <h1 id='search'>Traductor</h1>
@@ -45,7 +45,7 @@ export function Traductor(){
                           <select className='select'></select>
                           <textarea spellCheck="false" readOnly disabled className="to-text" placeholder={output} value={output}></textarea>
                           </div>
-                          <input type='submit' id='submit' value='Search' onSubmit={handleSubmit}/>
+                          <input type='submit' id='submit' value='Text' onSubmit={handleSubmit()}/>
                         </div>
                           
                         </form>
