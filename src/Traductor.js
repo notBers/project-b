@@ -10,16 +10,30 @@ export function Traductor(){
     
 
     const handleSubmit = (e) => {
+      e.preventDefault();
       if (!search) return;
 
       async function fetchData() {
-        const response = await fetch(`https://api.mymemory.translated.net/get?q=${search}!&langpair=en|it&key=e7556aa26e5a2d591e61`);
-        const data = await response.json();
-        const translation = data.responseData.translatedText
-        setOutput(translation);
+
+        const options = {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json',
+            'X-RapidAPI-Key': '3f10bba73emsh9af847ed70c4ddfp175cb0jsnfce47874f391',
+            'X-RapidAPI-Host': 'lecto-translation.p.rapidapi.com'
+          },
+          body: '{"texts":["Just try it mate.","What are you waiting for?"],"to":["hi"],"from":"en"}'
+        };
+        
+        const response = await fetch('https://lecto-translation.p.rapidapi.com/v1/translate/text', options);
+        setOutput(response.json());
       }
       fetchData();
-    }
+       
+    };
+
+
+    
   
     return(
           <body>
@@ -35,7 +49,7 @@ export function Traductor(){
                    </nav>
 
                      <div id='container'>
-                      <form className="wrapper">
+                      <form className="wrapper" onSubmit={handleSubmit}>
                         <div className="text-input">
                           <div id='left'>
                           <select className='select'></select>
@@ -43,9 +57,9 @@ export function Traductor(){
                           </div>
                           <div id='right'>
                           <select className='select'></select>
-                          <textarea spellCheck="false" readOnly disabled className="to-text" placeholder={output} value={output}></textarea>
+                          <textarea spellCheck="false" readOnly disabled className="to-text" value={output}></textarea>
                           </div>
-                          <input type='submit' id='submit' value='Text' onSubmit={handleSubmit()}/>
+                          <input type='submit' id='submit' value='Text'/>
                         </div>
                           
                         </form>

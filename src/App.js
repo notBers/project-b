@@ -7,6 +7,8 @@ import { Search } from './search';
 import { Bibliographies } from './cites';
 import {Math} from './Calc'
 import { Traductor } from './Traductor';
+import { TextCorrector } from './TextCorrector';
+
 function Login(){
   return (
     <div className= "wrapper fadeInDown">
@@ -65,6 +67,7 @@ function App() {
         <Route path="/" element={<Navigate to='Home' />} />
         <Route path="Login" element={<Login />} />
         <Route path="Signup" element={<Signup />} />
+        <Route path="/Home/Tools/TextCorrector" element={<TextCorrector signin={true}/>}/>
         <Route path="/Home/Tools/Translator" element={<Traductor signin={true}/>}/>
         <Route path="/Home/Tools/Math" element={<Math signin={true}/>}/>
         <Route path="/Home/Tools/Cites" element={<Bibliographies signin={true}/>}/>
