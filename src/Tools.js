@@ -13,23 +13,18 @@ function ToolsNav(){
              <header>
                  <nav class="nav">
                    <Link to = '/Home' class="logo">{back}</Link>
+                  </nav>
      
-                   <div class="hamburger">
-                     <span class="line"></span>
-                     <span class="line"></span>
-                     <span class="line"></span>
+                   <div class="nav__link">
+                     <div className='division'><Link to={'Search'}>Search</Link></div>
+                     <div className='division'><Link to={'Concepts'}>Concepts</Link></div>
+                     <div className='division'><Link to={'Math'}>Math</Link></div>
+                     <div className='division'><Link to={'Cites'}>Cites</Link></div>
+                     <div className='division'><Link to={'Translator'}>Translator</Link></div>
+                     <div className='division'><Link to={'Dictionaries'}>Dictionaries</Link></div>
+                     <div className='division'><Link to={'TextCorrector'}>Text corrector</Link></div>
                    </div>
-     
-                   <div class="nav__link hide">
-                     <Link to={'Search'}>Search</Link>
-                     <Link to={'Concepts'}>Concepts</Link>
-                     <Link to={'Math'}>Math</Link>
-                     <Link to={'Cites'}>Cites</Link>
-                     <Link to={'Translator'}>Translator</Link>
-                     <Link to={'Dictionaries'}>Dictionaries</Link>
-                     <Link to={'TextCorrector'}>Text corrector</Link>
-                   </div>
-                 </nav>
+                 
                </header>
                <style>
       { `
@@ -41,8 +36,10 @@ function ToolsNav(){
   font-family: 'Poppins', sans-serif;
 }
 body{
-  background-color: #F8F8FF;
+  background-color: #cccccc;;
   padding-top: 0%;
+  overflow-x: hidden;
+  
 }
         a {
           text-decoration: none;
@@ -53,11 +50,13 @@ body{
         }
 
         .nav {
+          margin-bottom: 80px;
           display: flex;
           justify-content: space-between;
           align-items: center;
           background-color: #014364;
-          padding: 20px 0 20px 0
+          padding: 20px 0 20px 0;
+
         }
 
         .logo {
@@ -83,7 +82,6 @@ body{
         .nav__link {
           position: fixed;
           width: 94%;
-          top: 5rem;
           left: 18px;
           
           background-color: blue; 
@@ -138,6 +136,8 @@ body{
           }
 
           .nav__link a {
+            position: relative;
+            top: 10px;
             display: inline-block;
             padding: 15px 20px;
       
@@ -146,6 +146,18 @@ body{
 
           .hamburger {
             display: none;
+          }
+
+          .division{
+            position: relative;
+            right: 30px;
+            padding-top: 10px;
+            width: 100%;
+            height: 120px;
+            background-color: #1C5693;
+            border-radius: 10px;
+            border: 1px solid black;
+            margin: 40px;
           }
       
           

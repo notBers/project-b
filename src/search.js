@@ -99,6 +99,7 @@ export function Search(){
 body{
   background-color: #F8F8FF;
   padding-top: 0%;
+  overflow-x: hidden;
 }
         .nav {
           display: flex;

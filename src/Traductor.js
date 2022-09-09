@@ -7,6 +7,8 @@ var back = '<-'
 export function Traductor(){
     const [search, setSearch] = useState('');
     const [output, setOutput] = useState('Translation');
+    const [lanin, setLanin] = useState('en')
+    const [lanout, setLanout] = useState('es')
     
 
     const handleSubmit = (e) => {
@@ -16,17 +18,17 @@ export function Traductor(){
       async function fetchData() {
 
         const options = {
-          method: 'POST',
+          method: 'GET',
           headers: {
-            'content-type': 'application/json',
             'X-RapidAPI-Key': '3f10bba73emsh9af847ed70c4ddfp175cb0jsnfce47874f391',
-            'X-RapidAPI-Host': 'lecto-translation.p.rapidapi.com'
-          },
-          body: '{"texts":["Just try it mate.","What are you waiting for?"],"to":["hi"],"from":"en"}'
+            'X-RapidAPI-Host': 'translated-mymemory---translation-memory.p.rapidapi.com'
+          }
         };
         
-        const response = await fetch('https://lecto-translation.p.rapidapi.com/v1/translate/text', options);
-        setOutput(response.json());
+        fetch(`https://translated-mymemory---translation-memory.p.rapidapi.com/api/get?langpair=${lanin}%7C${lanout}&q=${search.replaceAll(' ', '+')}!&mt=1&onlyprivate=0&de=a%40b.c`, options)
+          .then(response => response.json())
+          .then(response => setOutput(response.responseData.translatedText))
+          .catch(err => setOutput(err));
       }
       fetchData();
        
@@ -52,11 +54,21 @@ export function Traductor(){
                       <form className="wrapper" onSubmit={handleSubmit}>
                         <div className="text-input">
                           <div id='left'>
-                          <select className='select'></select>
+                          <select className='select' onChange={(e) => setLanin(e.target.value)} value={lanin}>
+                            <option value='en'>English</option>
+                            <option value='es'>Spanish</option>
+                            <option value='it'>Italian</option>
+                            <option value='fr'>French</option>
+                          </select>
                           <textarea spellCheck="false" className="from-text" placeholder="Enter text" onChange={e=> setSearch(e.target.value)}></textarea>
                           </div>
                           <div id='right'>
-                          <select className='select'></select>
+                          <select className='select' onChange={(e) => setLanout(e.target.value)} value={lanout}>
+                            <option value='en'>English</option>
+                            <option value='es'>Spanish</option>
+                            <option value='it'>Italian</option>
+                            <option value='fr'>French</option>
+                          </select>
                           <textarea spellCheck="false" readOnly disabled className="to-text" value={output}></textarea>
                           </div>
                           <input type='submit' id='submit' value='Text'/>
@@ -79,9 +91,11 @@ export function Traductor(){
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
   }
+
   body{
     background-color: #F8F8FF;
     padding-top: 0%;
+    overflow-x: hidden;
   }
           .nav {
             display: flex;

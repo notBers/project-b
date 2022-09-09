@@ -11,6 +11,7 @@ function Navbar(){
             <nav class="nav">
               <a href = '/account' class="logo">Account</a>
 
+            
               <div class="hamburger">
                 <span class="line"></span>
                 <span class="line"></span>
@@ -40,6 +41,7 @@ function Navbar(){
   font-family: 'Poppins', sans-serif;
 }
 body{
+
   background-color: #F8F8FF;
   padding-top: 0%;
 }

@@ -7,7 +7,8 @@ var back = '<-'
 export function TextCorrector(){
     const [search, setSearch] = useState('');
     const [output, setOutput] = useState('');
-  
+    const [lan, setLan] = useState('en')
+    let v;
     
     const handleSubmit = (e) => {
       e.preventDefault()
@@ -16,7 +17,7 @@ export function TextCorrector(){
   
       async function fetchdata(){    
         const encodedParams = new URLSearchParams();
-        encodedParams.append("language", "en-US");
+        encodedParams.append("language", lan);
         encodedParams.append("text", search);
     
         const options = {
@@ -31,8 +32,14 @@ export function TextCorrector(){
     
         fetch('https://dnaber-languagetool.p.rapidapi.com/v2/check', options)
             .then(response => response.json())
-            .then(response => setOutput(response.matches[0].message))
-            .catch(err => setOutput(err));
+            .then(response => v = response.matches)
+            .catch(err => {setOutput(err); return});
+        v = v?.map(e=>{
+          return(`error: (${e.message}) | correction: (${e.replacements[0].value})`)
+        })
+        
+
+        setOutput(v?.map(e => `${e}\n`))
           
       }
       
@@ -58,6 +65,10 @@ export function TextCorrector(){
 
                 <form id='container' onSubmit={handleSubmit}>
                   <div className='text'>
+                    <select className='select' onChange={(e) => setLan(e.target.value)} value={lan}>
+                            <option value='en-US'>English</option>
+                            <option value='es'>Spanish</option>
+                    </select>
                     <textarea className='container-in' placeholder='Write your text' onChange={(e)=> setSearch(e.target.value)}>
                         
                     </textarea>
@@ -79,8 +90,9 @@ export function TextCorrector(){
     font-family: 'Poppins', sans-serif;
   }
   body{
-    background-color: #F8F8FF;
+
     padding-top: 0%;
+    overflow-x: hidden;
   }
           .nav {
             display: flex;
@@ -143,6 +155,7 @@ export function TextCorrector(){
             margin: 2% auto;
             height: 80%;
             padding: 2%;
+            overflow: scroll;
           }
   
           #results{
@@ -179,6 +192,12 @@ export function TextCorrector(){
             background-color: #D5DBFF;
             margin: auto;
             
+          }
+
+          .select{
+            width: 10%;
+            border-radius: 10px;
+            margin-bottom: 5px;
           }
           
         }
