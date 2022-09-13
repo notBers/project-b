@@ -8,6 +8,7 @@ import { Bibliographies } from './cites';
 import {Math} from './Calc'
 import { Traductor } from './Traductor';
 import { TextCorrector } from './TextCorrector';
+import { NewGroup } from './NewGroup';
 
 function Login(){
 
@@ -180,7 +181,7 @@ function App() {
         <Route path="/Home/Tools/Search" element={<Search signin={true}/>}/>
         <Route path="/Home/Tools" element={<Tools signin={true}/>}/>
         <Route path="Home" element={<Home signin={true}/>}/>
-       
+        <Route path="/Classes/NewGroup" element={<NewGroup signin={true}/>}/>
         
       </Routes>
     </div>
