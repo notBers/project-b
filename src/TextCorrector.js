@@ -24,7 +24,7 @@ export function TextCorrector(){
             method: 'POST',
             headers: {
                 'content-type': 'application/x-www-form-urlencoded',
-                'X-RapidAPI-Key': '3f10bba73emsh9af847ed70c4ddfp175cb0jsnfce47874f391',
+                'X-RapidAPI-Key': 'f7941aaa02mshc2601f9351dba8dp12494bjsn9de91f362356',
                 'X-RapidAPI-Host': 'dnaber-languagetool.p.rapidapi.com'
             },
             body: encodedParams
