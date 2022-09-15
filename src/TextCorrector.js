@@ -24,7 +24,7 @@ export function TextCorrector(){
             method: 'POST',
             headers: {
                 'content-type': 'application/x-www-form-urlencoded',
-                'X-RapidAPI-Key': 'f7941aaa02mshc2601f9351dba8dp12494bjsn9de91f362356`',
+                'X-RapidAPI-Key': '3f10bba73emsh9af847ed70c4ddfp175cb0jsnfce47874f391',
                 'X-RapidAPI-Host': 'dnaber-languagetool.p.rapidapi.com'
             },
             body: encodedParams
@@ -66,8 +66,9 @@ export function TextCorrector(){
                 <form id='container' onSubmit={handleSubmit}>
                   <div className='text'>
                     <select className='select' onChange={(e) => setLan(e.target.value)} value={lan}>
-                            <option value='en-US'>English</option>
                             <option value='es'>Spanish</option>
+                            <option value='en-US'>English</option>
+                            
                     </select>
                     <textarea className='container-in' placeholder='Write your text' onChange={(e)=> setSearch(e.target.value)}>
                         

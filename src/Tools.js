@@ -179,7 +179,7 @@ body{
 
 
 export function Tools(props){
-    if(props.signin == false){
+    if(props.signin == 'false'){
         return <Navigate to="/Login" />;
     }else{
         return(
@@ -196,7 +196,7 @@ export function Tools(props){
 
 
 function Home(props){
-    if(props.signin == false){
+    if(props.signin == 'false'){
         return <Navigate to="/Login" />;
     }else{
         return(

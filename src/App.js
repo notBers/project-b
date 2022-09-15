@@ -9,6 +9,8 @@ import {Math} from './Calc'
 import { Traductor } from './Traductor';
 import { TextCorrector } from './TextCorrector';
 import { NewGroup } from './NewGroup';
+import { NewClass } from './NewClass';
+import Classes from './Classes';
 
 function Login(){
 
@@ -30,12 +32,14 @@ function Login(){
         var bodys = {mail: mail, password: password}
         const response = await fetch("http://localhost:3001/Login", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
         const message = await response.json()
-        console.log('hola')
         if(message.message == "ok"){
+          localStorage.setItem('islogged', "true")
+          localStorage.setItem('user', mail)
           navigate('/Home')
 
         }else{
-          setMessage('Invalid credentials')
+          localStorage.setItem('islogged', "false")
+          setMessage('Invalid credentials') 
         }
 
     
@@ -45,8 +49,11 @@ function Login(){
         const response = await fetch("http://localhost:3001/LoginTeacher", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
         const message = await response.json()
         if(message.message == "Invalid credentials"){
+          localStorage.setItem('islogged', 'false')
           setMessage('Invalid credentials')
         }else{
+          localStorage.setItem('islogged', 'true')
+          localStorage.setItem('user', mail)
           navigate('/Home')
         }
 
@@ -111,8 +118,11 @@ function Signup(){
         const response = await fetch("http://localhost:3001/RegisterUser", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
         const message = await response.json()
         if(message.message == "User already exists"){
+          localStorage.setItem('islogged', 'false')
           setMessage('User already exists')
         }else{
+          localStorage.setItem('islogged', 'true')
+          localStorage.setItem('user', mail)
           navigate('/Home')
         }
 
@@ -124,8 +134,12 @@ function Signup(){
         const message = await response.json()
         
         if(message.message == "Professor already exists"){
+          localStorage.setItem('islogged', 'false')
           setMessage('Professor already exists')
         }else{
+
+          localStorage.setItem('islogged', 'true')
+          localStorage.setItem('user', mail)
           navigate('/Home')
         }
 
@@ -174,15 +188,16 @@ function App() {
         <Route path="/" element={<Navigate to='Home' />} />
         <Route path="Login" element={<Login />} />
         <Route path="Signup" element={<Signup />} />
-        <Route path="/Home/Tools/TextCorrector" element={<TextCorrector signin={true}/>}/>
-        <Route path="/Home/Tools/Translator" element={<Traductor signin={true}/>}/>
-        <Route path="/Home/Tools/Math" element={<Math signin={true}/>}/>
-        <Route path="/Home/Tools/Cites" element={<Bibliographies signin={true}/>}/>
-        <Route path="/Home/Tools/Search" element={<Search signin={true}/>}/>
-        <Route path="/Home/Tools" element={<Tools signin={true}/>}/>
-        <Route path="Home" element={<Home signin={true}/>}/>
-        <Route path="/Classes/NewGroup" element={<NewGroup signin={true}/>}/>
-        
+        <Route path="/Home/Tools/TextCorrector" element={<TextCorrector signin={localStorage.getItem('islogged')} username={localStorage.getItem('user')}/>}/>
+        <Route path="/Home/Tools/Translator" element={<Traductor signin={localStorage.getItem('islogged')} username={localStorage.getItem('user')}/>}/>
+        <Route path="/Home/Tools/Math" element={<Math signin={localStorage.getItem('islogged')} username={localStorage.getItem('user')}/>}/>
+        <Route path="/Home/Tools/Cites" element={<Bibliographies signin={localStorage.getItem('islogged')} username={localStorage.getItem('user')}/>}/>
+        <Route path="/Home/Tools/Search" element={<Search signin={localStorage.getItem('islogged')} username={localStorage.getItem('user')}/>}/>
+        <Route path="/Home/Tools" element={<Tools signin={localStorage.getItem('islogged')} username={localStorage.getItem('user')}/>}/>
+        <Route path="Home" element={<Home signin={localStorage.getItem('islogged')} username={localStorage.getItem('user')}/>}/>
+        <Route path="Home/Classes/NewGroup" element={<NewGroup signin={localStorage.getItem('islogged')} username={localStorage.getItem('user')}/>}/>
+        <Route path="Home/Classes/NewClass" element={<NewClass signin={localStorage.getItem('islogged')} username={localStorage.getItem('user')}/>}/>
+        <Route path="Home/Classes" element={<Classes signin={localStorage.getItem('islogged')} username={localStorage.getItem('user')}/>}/>
       </Routes>
     </div>
   );
