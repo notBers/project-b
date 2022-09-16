@@ -1,14 +1,13 @@
-import { BrowserRouter, Routes, Route, Link, useNavigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Link, useNavigate, useParams } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 
 
-function ClassProffesor(props){
+function InClassProffesor(props){
 
   let count = 0
 
-  const [classes, setClasses] = useState([]);
+  const [Class, setClass] = useState([]);
   const [counter, setCounter] = useState(0);
-  const [classid, setClassid] = useState('');
 
   async function getclasses(a){
             if(a == 0){
@@ -16,9 +15,9 @@ function ClassProffesor(props){
               const response = await fetch("http://localhost:3001/GetClass", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
               const data = await response.json();
               const message = data.message;
-              message?.map(e=>{
-                  setClasses((arr) => [...arr, {response:`Class name: ${e.name} Professor: ${e.Professor}`, id: e._id}])
-              })
+            
+              setClass(props.id)
+              
 
               setCounter(1)
             }  
@@ -51,13 +50,12 @@ function ClassProffesor(props){
               
 
               <div class="nav__link hide">
-                <Link to={'NewGroup'}>+ New Group</Link>
-                <Link to={'NewClass'}>+ New Class</Link>
+                <Link to={':assignment'}>+ New Assignment</Link>
               </div>
             </nav>
           </header>
 
-          <div id='container'>{classes?.map(e=><div className="results"><Link className="inresults" to={'NewGroup'}>{e.response}</Link></div>)}</div>
+          <div id='container'>{Class.map(e=><div className="results"><Link className="inresults" to={'NewGroup'}>{e.response}</Link></div>)}</div>
 
 
     </section>
@@ -220,7 +218,8 @@ body{
   );
 }
 
-function ClassStudent(){
+
+function InClassStudent(){
     return (
     <body>
      <header>
@@ -373,7 +372,9 @@ function ClassStudent(){
   }
 
 
-  function Classes(props){
+  function InClasses(props){
+
+    const { id }  = useParams();
 
     const navigate = useNavigate();
 
@@ -400,7 +401,7 @@ function ClassStudent(){
         if(status == "ok"){
             return(
                 <div >
-                    <ClassStudent username={props.username}/>
+                    <InClassStudent username={props.username} id={id}/>
 
                 </div>
             )
@@ -408,7 +409,7 @@ function ClassStudent(){
 
             return(
                 <div>
-                    <ClassProffesor username={props.username} />
+                    <InClassProffesor username={props.username} id={id} />
                 </div>
             )
 
@@ -416,5 +417,4 @@ function ClassStudent(){
     } 
 }   
 
-export default Classes;
-
+export default InClasses;
