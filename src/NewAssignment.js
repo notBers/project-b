@@ -1,5 +1,5 @@
 import './App.css';
-import {Link, Navigate, useNavigate} from "react-router-dom";
+import {Link, Navigate, useNavigate, useLocation} from "react-router-dom";
 import React, { useState} from "react";
 
 
@@ -11,6 +11,9 @@ function AssignmentSucessful(props){
   const [names, setNames] = useState('');
   const [message, setMessage] = useState('');
   const [message1, setMessage1] = useState('');
+  const [description, setDescription] = useState('');
+  const [limit, setLimit] = useState('');
+  const location = useLocation();
 
   
   const handleSubmit1 = (e) => {
@@ -20,15 +23,15 @@ function AssignmentSucessful(props){
 
 
     async function fetchData1() {
-      var bodys = {name: name, Professor: props.username, group: names}
-      const response = await fetch("http://localhost:3001/NewClass", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
+      var bodys = {name: name, class: location.state.id, description: description, limit: limit}
+      const response = await fetch("http://localhost:3001/NewAssignment", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
       const data = await response.json();
 
-      if(data.message == 'Class created'){
+      if(data.message == 'assignment created'){
 
 
         setMessage1('')
-        navigate('/Home/Classes')
+        navigate(`/Home/Classes/${props.id}`)
 
 
       }else{
@@ -57,10 +60,13 @@ function AssignmentSucessful(props){
                 <div id='option-input'>
                     <form id ='form' onSubmit={handleSubmit1}>
                       <div className='centers'>
-                        <h3>Class name: </h3><h3 style={{'color': 'red'}}>{message1}</h3><input type='text' id='input' placeholder='name' maxLength="100" value={name} onChange={(e) => setName(e.target.value)}></input>
+                        <h3>Assignment Title: </h3><h3 style={{'color': 'red'}}>{message1}</h3><input type='text' id='input' placeholder='Title' maxLength="100" value={name} onChange={(e) => setName(e.target.value)}></input>
                       </div>
                       <div  className='centers'>
-                        <h3>Group: </h3><h3 style={{'color': 'red'}}>{message}</h3><input type='text'  id='input' placeholder='name' maxLength="100" value={names} onChange={(e) => setNames(e.target.value)}></input>
+                        <h3>Instructions: </h3><h3 style={{'color': 'red'}}>{message}</h3><input type='text'  id='input' placeholder='description' maxLength="100" value={description} onChange={(e) => setDescription(e.target.value)}></input>
+                      </div>
+                      <div  className='centers'>
+                        <h3>Limit: </h3><h3 style={{'color': 'red'}}>{message}</h3><input type='Date'  id='input' placeholder='description' maxLength="100" value={limit} onChange={(e) => setLimit(e.target.value)}></input>
                       </div>
                       <input type='submit' id='submit' value='Create Class'/>
                    </form>
@@ -195,7 +201,6 @@ body{
 }
 
 export function NewAssignment(props){
-
     const [status, setStatus] = useState('')
 
 
@@ -218,9 +223,9 @@ export function NewAssignment(props){
     console.log(status)
 
     if(props.signin == 'true' && status == "0"){
-            console.log('hola')
+            console.log(props.id)
             return(
-                <ClassSucessful username={props.username}/>
+                <AssignmentSucessful username={props.username} id={props.id}/>
 
             )
         

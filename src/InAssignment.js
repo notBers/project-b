@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route, Link, useNavigate, useParams, useLocation
 import React, { useState, useEffect } from "react";
 
 
-function InClassProffesor(props){
+function InAssignmentProffesor(props){
 
   let count = 0
   const navigate = useNavigate()
@@ -233,7 +233,7 @@ body{
 }
 
 
-function InClassStudent(){
+function InAssignmentStudent(){
     return (
     <body>
      <header>
@@ -386,7 +386,7 @@ function InClassStudent(){
   }
 
 
-  function InClasses(props){
+  function InAssignment(props){
 
     const { id } = useParams();
 
@@ -416,7 +416,7 @@ function InClassStudent(){
         if(status == "ok"){
             return(
                 <div >
-                    <InClassStudent username={props.username} id={id}/>
+                    <InAssignmentStudent username={props.username} id={id}/>
 
                 </div>
             )
@@ -424,7 +424,7 @@ function InClassStudent(){
 
             return(
                 <div>
-                    <InClassProffesor username={props.username} id={id} />
+                    <InAssignmentProffesor username={props.username} id={id} />
                 </div>
             )
 
@@ -432,4 +432,4 @@ function InClassStudent(){
     } 
 }   
 
-export default InClasses;
+export default InAssignment;

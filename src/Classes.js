@@ -44,7 +44,7 @@ function ClassProffesor(props){
   <body>
    <header>
     <section id="home">
-        <header>
+        
             <nav class="nav">
               <a href = '/Home' class="logo">{'<-'}</a>
 
@@ -55,9 +55,9 @@ function ClassProffesor(props){
                 <Link to={'NewClass'}>+ New Class</Link>
               </div>
             </nav>
-          </header>
+          
 
-          <div id='container'>{classes?.map(e=><div className="results"><Link className="inresults" to={'NewGroup'}>{e.response}</Link></div>)}</div>
+          <div id='container'>{classes?.map(e=><div className="results"><Link className="inresults" to={`${e.id}`}>{e.response}</Link></div>)}</div>
 
 
     </section>
