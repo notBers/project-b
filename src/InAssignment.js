@@ -4,31 +4,32 @@ import React, { useState, useEffect } from "react";
 
 function InAssignmentProffesor(props){
 
-  let count = 0
-  const navigate = useNavigate()
+  let count = 0;
+  const navigate = useNavigate();
   const [counter, setCounter] = useState(0);
   const [assignment, setAssignment] = useState([]);
+  const [description, setDescription] = useState('');
+  const [limit, setLimit] = useState('');
+  const location = useLocation();
 
   async function getclasses(a){
             if(a == 0){
-              var bodys = {Professor: props.username, _id: props.id}
-              const response = await fetch("http://localhost:3001/ClassExists", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
+              var bodys = {_id: props.id}
+              const response = await fetch("http://localhost:3001/AssignmentExists", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
               const data = await response.json();
               const message = data.message;
-              console.log(message)
               if(message == 'error in params'){
                 navigate('/Home/Classes')
               }else if(message == 'it doesnt exists'){
                 navigate('/Home/Classes')
                 
+              }else{
+                setAssignment(message.name)
+                setDescription(message.description)
+                setLimit(message.limit)
+
+
               }
-              var bodys = {Class: props.id}
-              const response2 = await fetch("http://localhost:3001/GetAssignments", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
-              const data2 = await response2.json();
-              const message2 = data2.message;
-              message2?.map(e=>{
-                  setAssignment((arr) => [...arr, {response:`Assignment name: (${e.name}) Limit: (${e.limit}) `, id: e._id, description: e.description}])
-              }) 
 
               setCounter(1)
             }  
@@ -58,17 +59,25 @@ function InAssignmentProffesor(props){
     <section id="home">
         <header>
             <nav class="nav">
-              <a href = '/Home/Classes' class="logo">{'<-'}</a>
+              <a href = {`/Home/Classes/${location.state.id}`} class="logo">{'<-'}</a>
 
-              
 
               <div class="nav__link hide">
-                <Link to={'NewAssignment'} state={{id: props.id }}>+ New Assignment</Link>
+                <Link to={'Student`sWork'} state={{id: props.id, prev_id: 'id'}}>Student`s Work</Link>
               </div>
             </nav>
           </header>
 
-          <div id='container'>{assignment?.map(e=><div className="results"><Link className="inresults" to={`${e.id}`} state={{assignment_id: e.id}}>{e.response}</Link></div>)}</div>
+          <div id='container'>
+
+            <div id='tan'>
+                <h1 id='title'>{`Title: ${assignment}`}</h1>
+                <h1 id='limit'>{`Limit Date: ${limit}`}</h1>
+                <h1 id='description'>{`Instructions: ${description}`}</h1>
+            </div>
+
+
+          </div>
 
 
     </section>
@@ -103,6 +112,14 @@ body{
           align-items: center;
           background-color: #014364;
           padding: 20px 0 20px 0
+        }
+
+        #tan{
+            padding: 10px;
+            overflow: scroll;
+            width: 100%;
+            text-align: center;
+            margin: auto;
         }
 
         .logo {
@@ -220,6 +237,21 @@ body{
           .inresults{
             font-size: 60px;
             color: black;
+          }
+
+          #title{
+            font-size: 114px;
+            text-align: center
+          }
+
+          #description{
+            text-align: center
+          }
+
+          #limit{
+            font-size: 50px;
+            margin: 10px;
+            text-align: center
           }
           
         }
@@ -387,8 +419,10 @@ function InAssignmentStudent(){
 
 
   function InAssignment(props){
+    
 
-    const { id } = useParams();
+    const { assignment_id } = useParams();
+
 
 
     const navigate = useNavigate();
@@ -416,7 +450,7 @@ function InAssignmentStudent(){
         if(status == "ok"){
             return(
                 <div >
-                    <InAssignmentStudent username={props.username} id={id}/>
+                    <InAssignmentStudent username={props.username} id={assignment_id}/>
 
                 </div>
             )
@@ -424,7 +458,7 @@ function InAssignmentStudent(){
 
             return(
                 <div>
-                    <InAssignmentProffesor username={props.username} id={id} />
+                    <InAssignmentProffesor username={props.username} id={assignment_id} />
                 </div>
             )
 

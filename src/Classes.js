@@ -16,7 +16,7 @@ function ClassProffesor(props){
               const response = await fetch("http://localhost:3001/GetClass", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
               const data = await response.json();
               const message = data.message;
-              message?.map(e=>{
+              message.reverse()?.map(e=>{
                   setClasses((arr) => [...arr, {response:`Class name: ${e.name} Professor: ${e.Professor}`, id: e._id}])
               })
 

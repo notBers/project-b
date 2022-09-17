@@ -68,7 +68,7 @@ function InClassProffesor(props){
             </nav>
           </header>
 
-          <div id='container'>{assignment?.map(e=><div className="results"><Link className="inresults" to={`${e.id}`} state={{assignment_id: e.id}}>{e.response}</Link></div>)}</div>
+          <div id='container'>{assignment.reverse()?.map(e=><div className="results"><Link className="inresults" to={`${e.id}`} state={{id: props.id }}>{e.response}</Link></div>)}</div>
 
 
     </section>

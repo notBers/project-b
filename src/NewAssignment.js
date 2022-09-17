@@ -31,7 +31,7 @@ function AssignmentSucessful(props){
 
 
         setMessage1('')
-        navigate(`/Home/Classes/${props.id}`)
+        navigate(`/Home/Classes/${location.state.id}`)
 
 
       }else{
@@ -63,7 +63,7 @@ function AssignmentSucessful(props){
                         <h3>Assignment Title: </h3><h3 style={{'color': 'red'}}>{message1}</h3><input type='text' id='input' placeholder='Title' maxLength="100" value={name} onChange={(e) => setName(e.target.value)}></input>
                       </div>
                       <div  className='centers'>
-                        <h3>Instructions: </h3><h3 style={{'color': 'red'}}>{message}</h3><input type='text'  id='input' placeholder='description' maxLength="100" value={description} onChange={(e) => setDescription(e.target.value)}></input>
+                        <h3>Instructions: </h3><h3 style={{'color': 'red'}}>{message}</h3><textarea type='text' maxLength='1000' id='input' placeholder='description' value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
                       </div>
                       <div  className='centers'>
                         <h3>Limit: </h3><h3 style={{'color': 'red'}}>{message}</h3><input type='Date'  id='input' placeholder='description' maxLength="100" value={limit} onChange={(e) => setLimit(e.target.value)}></input>
@@ -120,6 +120,11 @@ body{
         
         .result{
           margin: 20px
+        }
+
+        #input{
+            border-radius: 5px;
+            padding: 5px;
         }
         
         #form{
@@ -219,8 +224,6 @@ export function NewAssignment(props){
 
     fetchData();
 
-
-    console.log(status)
 
     if(props.signin == 'true' && status == "0"){
             console.log(props.id)
