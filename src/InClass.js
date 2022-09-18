@@ -8,6 +8,7 @@ function InClassProffesor(props){
   const navigate = useNavigate()
   const [counter, setCounter] = useState(0);
   const [assignment, setAssignment] = useState([]);
+  const [group, setGroup] = useState([]);
 
   async function getclasses(a){
             if(a == 0){
@@ -15,13 +16,18 @@ function InClassProffesor(props){
               const response = await fetch("http://localhost:3001/ClassExists", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
               const data = await response.json();
               const message = data.message;
-              console.log(message)
               if(message == 'error in params'){
                 navigate('/Home/Classes')
               }else if(message == 'it doesnt exists'){
                 navigate('/Home/Classes')
                 
               }
+
+              setGroup(message[0].Group)
+
+              
+
+
               var bodys = {Class: props.id}
               const response2 = await fetch("http://localhost:3001/GetAssignments", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
               const data2 = await response2.json();
@@ -58,12 +64,13 @@ function InClassProffesor(props){
     <section id="home">
         <header>
             <nav class="nav">
-              <a href = '/Home/Classes' class="logo">{'<-'}</a>
+              <Link to = '/Home/Classes' className="logo">{'<-'}</Link>
 
               
 
               <div class="nav__link hide">
                 <Link to={'NewAssignment'} state={{id: props.id }}>+ New Assignment</Link>
+                <Link to={'Students'} state={{id: props.id, group: group }}>Students</Link>
               </div>
             </nav>
           </header>

@@ -31,7 +31,7 @@ export function Math(){
           <header>
                
                    <nav className="nav">
-                     <Link to = '/Home/Tools' class="logo">{back}</Link>
+                     <Link to = '/Home/Tools' className="logo">{back}</Link>
   
                      <div className="logo">
                         <h1 id='search'>Math</h1>

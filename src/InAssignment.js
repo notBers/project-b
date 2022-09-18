@@ -59,7 +59,7 @@ function InAssignmentProffesor(props){
     <section id="home">
         <header>
             <nav class="nav">
-              <a href = {`/Home/Classes/${location.state.id}`} class="logo">{'<-'}</a>
+              <Link to = {`/Home/Classes/${location.state.id}`} className="logo">{'<-'}</Link>
 
 
               <div class="nav__link hide">

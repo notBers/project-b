@@ -226,7 +226,6 @@ export function NewAssignment(props){
 
 
     if(props.signin == 'true' && status == "0"){
-            console.log(props.id)
             return(
                 <AssignmentSucessful username={props.username} id={props.id}/>
 

@@ -9,7 +9,7 @@ function Navbar(){
     <section id="home">
         <header>
             <nav class="nav">
-              <a href = '/account' class="logo">Account</a>
+              <Link to = '/Login' className="logo">Account</Link>
 
             
               <div class="hamburger">

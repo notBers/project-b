@@ -43,8 +43,8 @@ function GroupSucessful(props){
      
   };
 
-  const handleSubmit2 = (e) => {
-    if (names == '') return;
+  const handle = (e) => {
+   
 
     async function fetchData() {
         var bodys = {mail: names}
@@ -54,6 +54,7 @@ function GroupSucessful(props){
         if(data.message == 'ok'){
 
             setStudents((arr) => [...arr, names])
+            setNames('')
             setMessage('')
         }else{
             setMessage(data.message)
@@ -91,7 +92,7 @@ function GroupSucessful(props){
                       <div  className='centers'>
                         <h3>People: </h3><h3 style={{'color': 'red'}}>{message}</h3><input type='text'  id='input' placeholder='name' maxLength="100" value={names} onChange={(e) => setNames(e.target.value)}></input>
                         
-                        <button onClick={handleSubmit2}  id='submit' value='add'>add student</button>
+                        <button onClick={handle} type='button' id='submit' value='add'>add student</button>
                       </div>
                       <input type='submit' id='submit' value='Create Group'/>
                    </form>
@@ -244,8 +245,6 @@ export function NewGroup(props){
 
   fetchData();
 
-
-  console.log(status)
 
   if(props.signin == 'true' && status == "0"){
 
