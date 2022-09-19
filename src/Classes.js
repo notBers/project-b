@@ -231,8 +231,8 @@ function ClassStudent(props){
 
   async function getclasses(a){
     if(a == 0){
-      var bodys = {Professor: props.username}
-      const response = await fetch("http://localhost:3001/GetClass", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
+      var bodys = {Students: props.username}
+      const response = await fetch("http://localhost:3001/ClassesIn", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
       const data = await response.json();
       const message = data.message;
       message.reverse()?.map(e=>{
@@ -264,7 +264,7 @@ function ClassStudent(props){
                </nav>
              
    
-             <div id='container'></div>
+             <div id='container'>{classes?.map(e=><div className="results"><Link className="inresults" to={`${e.id}`}>{e.response}</Link></div>)}</div>
    
    
        </section>
@@ -442,7 +442,9 @@ function ClassStudent(props){
   
         if(data.message == 'ok'){
             setStatus(data.message)
+           
         }else{
+
             setStatus("0")
         
         }

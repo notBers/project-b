@@ -66,7 +66,6 @@ export function TextCorrector(){
                 <form id='container' onSubmit={handleSubmit}>
                   <div className='text'>
                     <select className='select' onChange={(e) => setLan(e.target.value)} value={lan}>
-                            <option value='es'>Spanish</option>
                             <option value='en-US'>English</option>
                             
                     </select>

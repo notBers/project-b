@@ -36,7 +36,7 @@ function ToolsNav(){
   font-family: 'Poppins', sans-serif;
 }
 body{
-  background-color: #cccccc;;
+  background-color: white;
   padding-top: 0%;
   overflow-x: hidden;
   

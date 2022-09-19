@@ -50,7 +50,7 @@ function StudentsSuccesful(props){
      <section id="home">
          <header>
              <nav class="nav">
-               <Link to= '/Home/Classes' className="logo">{'<-'}</Link>
+               <Link to= {`/Home/Classes/${location.state.id}`} className="logo">{'<-'}</Link>
              </nav>
            </header>
  
