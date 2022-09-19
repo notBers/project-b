@@ -17,7 +17,7 @@ function ClassProffesor(props){
               const data = await response.json();
               const message = data.message;
               message.reverse()?.map(e=>{
-                  setClasses((arr) => [...arr, {response:`Class name: ${e.name} Professor: ${e.Professor}`, id: e._id}])
+                  setClasses((arr) => [...arr, {response:`Class name: ${e.name}`, id: e._id}])
               })
 
               setCounter(1)
@@ -236,7 +236,7 @@ function ClassStudent(props){
       const data = await response.json();
       const message = data.message;
       message.reverse()?.map(e=>{
-          setClasses((arr) => [...arr, {response:`Class name: ${e.name} Professor: ${e.Professor}`, id: e._id}])
+          setClasses((arr) => [...arr, {response:`Class name: (${e.name}) Professor: (${e.Professor})`, id: e._id}])
       })
 
       setCounter(1)
