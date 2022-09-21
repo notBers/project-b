@@ -1,6 +1,7 @@
 import './App.css';
 import {Link, Navigate, useNavigate, useLocation} from "react-router-dom";
 import React, {useState, useEffect} from "react";
+import { Students } from './Students';
 
 
 var back = '<-'
@@ -19,16 +20,16 @@ function StudentsSuccesful(props){
   
     async function getclasses(a){
               if(a == 0){
-                var bodys = {name: location.state.group}
-                const response = await fetch("http://localhost:3001/Group", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
+                var bodys = {name: location.state.id}
+                const response = await fetch("http://localhost:3001/StudentsWork", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
                 const data = await response.json();
-                const message = data.message;
-                const student = message[0].Students
+                const message = data.students;
+                const student = message;
                 student?.map(e=>{
-                    setStudents((arr) => [...arr, e])
+                    setStudents((arr) => [...arr, e.name]);
                 })
 
-                setCounter(1)
+                setCounter(1);
               }  
       
     }
@@ -48,13 +49,21 @@ function StudentsSuccesful(props){
     <body>
     <header>
      <section id="home">
-         <header>
-             <nav class="nav">
-               <Link to= {`/Home/Classes/${location.state.id}`} className="logo">{'<-'}</Link>
-             </nav>
-           </header>
+
  
-           <div id='container'>{students?.sort().map(e=><div className='results'><Link className='inresults' to={`/messages/${e}`}>{e}</Link></div>)}</div>
+           <div id='aside'>
+           {students.sort()?.map(e=><button className="results" >{e}</button>)}
+            </div>
+
+            <div id='aside-left'>
+                <div id='vwrapper'>
+                    <h1 id='description'>{}</h1>
+                    <h2 id='link'></h2>
+                    <form>
+                        <input type = 'text' placeholder='enter the mark here'/>
+                    </form>
+                </div>
+            </div>
  
  
      </section>
@@ -96,8 +105,20 @@ body{
             cursor: default;
             width: 94.1% ;
             margin-left: 5%;
-           
-          
+        }
+
+        #home{
+            width: 100%;
+            height: 100%;
+        }
+
+        #aside{
+            width: 30%;
+            height: 100vh;
+            background-color: white;
+            float: left;
+            border: 1px solid blue;
+
         }
 
         .centers{
@@ -150,15 +171,11 @@ body{
 
 
           .results{
-            overflow-x: hidden;
-            width: 99%;
-            border: 2px solid black;
-            height: 200px;
-            padding: 10px;  
-            font-size: 60px;
-            background-color: rgb(1, 136, 160);
-            margin: 10px auto auto auto;
-            border-radius: 5px;
+            width: 100%;
+            border-bottom: 2px solid black;
+            height: 50px;
+            background-color: white;  
+            font-size: 25px;
           }
 
           .results:hover {

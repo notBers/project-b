@@ -499,8 +499,9 @@ body{
     if(props.signin == 'false'){
         navigate('/login')
     }else{
-
+       
         if(status == "ok"){
+          
             return(
                 <div >
                     <InClassStudent username={props.username} id={id}/>
