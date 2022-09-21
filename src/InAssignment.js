@@ -63,7 +63,7 @@ function InAssignmentProffesor(props){
 
 
               <div class="nav__link hide">
-                <Link to={'Student`sWork'} state={{id: props.id, prev_id: 'id'}}>Student`s Work</Link>
+                <Link to={'StudentsWork'} state={{id: props.id}}>Student`s Work</Link>
               </div>
             </nav>
           </header>
@@ -275,6 +275,7 @@ function InAssignmentStudent(props){
   const [description, setDescription] = useState('');
   const [limit, setLimit] = useState('');
   const [content, setContent] = useState('')
+  const [link, setLink] = useState('')
   const location = useLocation();
 
   async function getclasses(a){
@@ -312,6 +313,30 @@ function InAssignmentStudent(props){
     
   }, [])
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (content == '') return;
+
+
+
+    async function fetchData1() {
+      var bodys = {name: props.username, message: content, link: link, assignment: props.id}
+      const response = await fetch("http://localhost:3001/NewUserAssignment", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
+      const data = await response.json();
+
+      if(data.message == 'you already uploaded this task'){
+        alert('You already uploaded this task')
+      }else{
+        alert('Uploaded')
+      }
+        
+
+
+    }
+    fetchData1();
+     
+  };
+
 
 
   return (
@@ -332,11 +357,11 @@ function InAssignmentStudent(props){
                 <h1 id='description'>{`Instructions: ${description}`}</h1>
             </div>
 
-            <form>
+            <form onSubmit={handleSubmit}>
               <div id='center'>
                 <textarea id='contents' placeholder="Enter text or description or task" maxLength='10000' value={content} onChange={(e) => setContent(e.target.value)} />
-                <input id='con' type='text' placeholder='submit a link (optional)'/>
-                <input id='submit' value='Submit task'/>
+                <input id='con' type='text' placeholder='submit a link (optional)' value={link} onChange={e => setLink(e.target.value)}/>
+                <input type='submit' id='submit' value='Submit task'/>
               </div>
 
             </form>
@@ -382,6 +407,7 @@ body{
         #tan{
             padding: 10px;
             overflow: scroll;
+            overflow-x: hidden;
             width: 100%;
             text-align: center;
             margin: auto;

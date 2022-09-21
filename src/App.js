@@ -15,6 +15,7 @@ import InClasses from './InClass';
 import { NewAssignment } from './NewAssignment';
 import InAssignment from './InAssignment';
 import { Students } from './Students';
+import { StudentsWork } from './StudentsWork';
 
 function Login(){
 
@@ -199,6 +200,7 @@ function App() {
         <Route path="/Home/Tools/Search" element={<Search signin={localStorage.getItem('islogged')} username={localStorage.getItem('user')}/>}/>
         <Route path="/Home/Tools" element={<Tools signin={localStorage.getItem('islogged')} username={localStorage.getItem('user')}/>}/>
         <Route path="Home" element={<Home signin={localStorage.getItem('islogged')} username={localStorage.getItem('user')}/>}/>
+        <Route path="Home/Classes/:id/:assignment_id/StudentsWork" element={<StudentsWork signin={localStorage.getItem('islogged')} username={localStorage.getItem('user')}/>}/>
         <Route path="Home/Classes/:id/:assignment_id" element={<InAssignment signin={localStorage.getItem('islogged')} username={localStorage.getItem('user')}/>}/>
         <Route path="Home/Classes/:id/Students" element={<Students signin={localStorage.getItem('islogged')} username={localStorage.getItem('user')}/>}/>
         <Route path="Home/Classes/:id/NewAssignment" element={<NewAssignment signin={localStorage.getItem('islogged')} username={localStorage.getItem('user')}/>}/>

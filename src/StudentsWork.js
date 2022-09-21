@@ -1,74 +1,65 @@
 import './App.css';
-import {Link, Navigate, useNavigate} from "react-router-dom";
-import React, { useState} from "react";
+import {Link, Navigate, useNavigate, useLocation} from "react-router-dom";
+import React, {useState, useEffect} from "react";
 
 
 var back = '<-'
 
-function ClassSucessful(props){
-  const navigate = useNavigate();
-  const [name, setName] = useState('');
-  const [names, setNames] = useState('');
-  const [message, setMessage] = useState('');
-  const [message1, setMessage1] = useState('');
 
 
+
+
+function StudentsSuccesful(props){
+
+    let count = 0
+    const location = useLocation()
+    const [students, setStudents] = useState([]);
+    const [counter, setCounter] = useState(0);
+    const [classid, setClassid] = useState('');
   
-  const handleSubmit1 = (e) => {
-    e.preventDefault();
-    if (name == '') return;
+    async function getclasses(a){
+              if(a == 0){
+                var bodys = {name: location.state.group}
+                const response = await fetch("http://localhost:3001/Group", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
+                const data = await response.json();
+                const message = data.message;
+                const student = message[0].Students
+                student?.map(e=>{
+                    setStudents((arr) => [...arr, e])
+                })
 
-
-
-    async function fetchData1() {
-      var bodys = {name: name, Professor: props.username, group: names}
-      const response = await fetch("http://localhost:3001/NewClass", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
-      const data = await response.json();
-
-      if(data.message == 'Class created'){
-
-
-        setMessage1('')
-        navigate('/Home/Classes')
-
-
-      }else{
-            setMessage1(data.message)
-      }
-        
-
-
+                setCounter(1)
+              }  
+      
     }
-    fetchData1();
-     
-  };
+    
+    useEffect(() => {
+      if(count == 0){
+          getclasses(counter)
+          count = 1
+      }
+       
+      
+    }, [])
+
 
 
   return(
-        <body>
-        
-        <header>
-
-
-            </header>
-
-            
-                <div className='container'>
-
-                <div id='option-input'>
-                    <form id ='form' onSubmit={handleSubmit1}>
-                      <div className='centers'>
-                        <h3>Class name: </h3><h3 style={{'color': 'red'}}>{message1}</h3><input type='text' id='input' placeholder='name' maxLength="100" value={name} onChange={(e) => setName(e.target.value)}></input>
-                      </div>
-                      <div  className='centers'>
-                        <h3>Group: </h3><h3 style={{'color': 'red'}}>{message}</h3><input type='text'  id='input' placeholder='name' maxLength="100" value={names} onChange={(e) => setNames(e.target.value)}></input>
-                      </div>
-                      <input type='submit' id='submit' value='Create Class'/>
-                   </form>
-                </div>
-                    
-
-                </div>
+    <body>
+    <header>
+     <section id="home">
+         <header>
+             <nav class="nav">
+               <Link to= {`/Home/Classes/${location.state.id}`} className="logo">{'<-'}</Link>
+             </nav>
+           </header>
+ 
+           <div id='container'>{students?.sort().map(e=><div className='results'><Link className='inresults' to={`/messages/${e}`}>{e}</Link></div>)}</div>
+ 
+ 
+     </section>
+ 
+     </header>
             
             <style>
       { `
@@ -98,13 +89,15 @@ body{
           padding-right: 50px;
         }
         #option-input{
- 
-            margin: auto;
+            
+            margin-left: 1%;
             font-size: 32px;
             color: rgb(45, 182, 175);
             cursor: default;
             width: 94.1% ;
-
+            margin-left: 5%;
+           
+          
         }
 
         .centers{
@@ -114,6 +107,11 @@ body{
         .result{
           margin: 20px
         }
+
+        #input{
+            border-radius: 5px;
+            padding: 5px;
+        }
         
         #form{
           margin-top: 1%;
@@ -121,7 +119,7 @@ body{
           margin: auto;
         }
         #input{
-          width: 100%;
+          width: 81%;
           margin: auto
 
         }
@@ -134,10 +132,10 @@ body{
           margin-left: .2%;
         }
         #submit{
-          width: 100%;
+          width: 81%;
           margin: 2% auto 0 0;
           margin-bottom: .5%;
-          margin-top: 30px;
+          margin-top: 30px
         }
 
         #submit2{
@@ -151,19 +149,41 @@ body{
 
 
 
-        #results{
-          margin-top: 1%;
-          text-align: center;
-        }
+          .results{
+            overflow-x: hidden;
+            width: 99%;
+            border: 2px solid black;
+            height: 200px;
+            padding: 10px;  
+            font-size: 60px;
+            background-color: rgb(1, 136, 160);
+            margin: 10px auto auto auto;
+            border-radius: 5px;
+          }
+
+          .results:hover {
+            border-bottom: 3px solid rgb(151, 232, 247);
+            border-radius: 7px;
+            transition: all 0.2s ease;
+          }
+  
+          .results:active {
+            border-bottom: 3px solid rgb(151, 232, 247);
+            background-color: rgb(175, 238, 235)
+          }
+          .inresults{
+            font-size: 60px;
+            color: black;
+          }
         
         .container{
           padding-top: 50px;
-          padding: 50px;
           position: relative;
           background-color: white;
-          width: 25%;
+          height: 46%;
+          width: 15%;
           margin: auto;
-          margin-top: 10%;
+          margin-top: 8%;
           border-radius: 8px;
         }
         .display{
@@ -193,8 +213,7 @@ body{
 
 }
 
-export function NewClass(props){
-
+export function StudentsWork(props){
     const [status, setStatus] = useState('')
 
 
@@ -216,7 +235,7 @@ export function NewClass(props){
 
     if(props.signin == 'true' && status == "0"){
             return(
-                <ClassSucessful username={props.username}/>
+                <StudentsSuccesful username={props.username}/>
 
             )
         

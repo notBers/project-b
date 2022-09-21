@@ -104,12 +104,12 @@ body{
         }
         #option-input{
             
-            margin-left: 1%;
+            margin: auto;
             font-size: 32px;
             color: rgb(45, 182, 175);
             cursor: default;
-            width: 94.1% ;
-            margin-left: 5%;
+            width: 100%;
+            
            
           
         }
@@ -133,7 +133,7 @@ body{
           margin: auto;
         }
         #input{
-          width: 81%;
+          width: 100%;
           margin: auto
 
         }
@@ -146,7 +146,7 @@ body{
           margin-left: .2%;
         }
         #submit{
-          width: 81%;
+          width: 100%;
           margin: 2% auto 0 0;
           margin-bottom: .5%;
           margin-top: 30px
@@ -169,13 +169,12 @@ body{
         }
         
         .container{
-          padding-top: 50px;
+          padding: 50px;
           position: relative;
           background-color: white;
-          height: 46%;
-          width: 15%;
+          width: 25%;
           margin: auto;
-          margin-top: 8%;
+          margin-top: 10%;
           border-radius: 8px;
         }
         .display{

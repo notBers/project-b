@@ -130,13 +130,11 @@ body{
         }
         #option-input{
             
-            margin-left: 1%;
-            font-size: 32px;
-            color: rgb(45, 182, 175);
-            cursor: default;
-            width: 94.1% ;
-            margin-left: 5%;
-           
+          margin: auto;
+          font-size: 32px;
+          color: rgb(45, 182, 175);
+          cursor: default;
+          width: 94.1% ;     
           
         }
 
@@ -150,11 +148,11 @@ body{
         
         #form{
           margin-top: 1%;
-          width: 110%
+          width: 100%;
           margin: auto;
         }
         #input{
-          width: 81%;
+          width: 100%;
           margin: auto
 
         }
@@ -164,10 +162,10 @@ body{
           margin: auto;
           border-radius: 5px;
           border-color: transparent;
-          margin-left: .2%;
+          
         }
         #submit{
-          width: 81%;
+          width: 100%;
           margin: 2% auto 0 0;
           margin-bottom: .5%;
           margin-top: 30px
@@ -175,11 +173,9 @@ body{
 
         #submit2{
             text-align: center;
-            width: 200px;
+            width: 100%;
             margin: auto;
-            margin-bottom: .5%;
-            margin-left: 5px;
-            margin-top: 20px;
+
           }
 
 
@@ -190,13 +186,12 @@ body{
         }
         
         .container{
-          padding-top: 50px;
+          padding: 50px;
           position: relative;
           background-color: white;
-          height: 46%;
-          width: 15%;
+          width: 25%;
           margin: auto;
-          margin-top: 8%;
+          margin-top: 10%;
           border-radius: 8px;
         }
         .display{
