@@ -17,8 +17,10 @@ function InClassProffesor(props){
               const data = await response.json();
               const message = data.message;
               if(message == 'error in params'){
+                
                 navigate('/Home/Classes')
               }else if(message == 'it doesnt exists'){
+                
                 navigate('/Home/Classes')
                 
               }
