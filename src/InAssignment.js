@@ -276,6 +276,7 @@ function InAssignmentStudent(props){
   const [limit, setLimit] = useState('');
   const [content, setContent] = useState('')
   const [link, setLink] = useState('')
+  const [mark, setMark] = useState('')
   const location = useLocation();
 
   async function getclasses(a){
@@ -325,6 +326,7 @@ function InAssignmentStudent(props){
       const data = await response.json();
 
       if(data.message == 'you already uploaded this task'){
+        setMark(data.mark)
         alert('You already uploaded this task')
       }else{
         alert('Uploaded')
@@ -355,6 +357,8 @@ function InAssignmentStudent(props){
                 <h1 id='title'>{`Title: ${assignment}`}</h1>
                 <h1 id='limit'>{`Limit Date: ${limit}`}</h1>
                 <h1 id='description'>{`Instructions: ${description}`}</h1>
+                <hr></hr>
+                <h1>{`mark: ${mark}`}</h1>
             </div>
 
             <form onSubmit={handleSubmit}>

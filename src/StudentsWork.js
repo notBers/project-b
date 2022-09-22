@@ -16,8 +16,12 @@ function StudentsSuccesful(props){
     const location = useLocation()
     const [students, setStudents] = useState([]);
     const [counter, setCounter] = useState(0);
-    const [classid, setClassid] = useState('');
-  
+    const [description, setDescription] = useState('');
+    const [link, setLink] = useState('');
+    const [mark, setMark] = useState('');
+    const [name, setName] = useState('')
+    const [iin, setIn] = useState('')
+
     async function getclasses(a){
               if(a == 0){
                 var bodys = {name: location.state.id}
@@ -43,6 +47,28 @@ function StudentsSuccesful(props){
       
     }, [])
 
+    const onclick = async (e) => {
+      setName(e.target.value)
+      var bodys = {name: location.state.id, username: e.target.value}
+      const response = await fetch("http://localhost:3001/StudentWork", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
+      const data = await response.json();
+      const message = data.students;
+      const student = message;
+      
+        setDescription(student.message);
+        setLink(student.link);
+        setMark(student.mark)
+    }
+
+    const onSubmit = async (e) => {
+      var bodys = {mark: mark, name: name, assignment: location.state.id }
+      const response = await fetch("http://localhost:3001/StudentWorkMark", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
+      const data = await response.json();
+      const message = data.students;
+      const student = message;
+      setMark(student.mark)
+    }
+
 
 
   return(
@@ -52,16 +78,18 @@ function StudentsSuccesful(props){
 
  
            <div id='aside'>
-           {students.sort()?.map(e=><button className="results" >{e}</button>)}
+           {students.sort()?.map(e=><button onClick={onclick} className="results" value={e} >{e}</button>)}
             </div>
 
             <div id='aside-left'>
                 <div id='vwrapper'>
-                    <h1 id='description'>{}</h1>
-                    <h2 id='link'></h2>
-                    <form>
-                        <input type = 'text' placeholder='enter the mark here'/>
-                    </form>
+                    <h1 id='description'>{description}</h1>
+                    <h2 id='links'>{link}</h2>
+                    <h3 id='links'>mark: {mark}</h3>
+                    <div>
+                        <input type = 'text' placeholder='enter the mark here' onChange={e => setMark(e.target.value)}/>
+                        <button type='button' onClick={onSubmit} id='submit'>Upload mark</button>
+                    </div>
                 </div>
             </div>
  
@@ -83,6 +111,11 @@ body{
   padding-top: 0%;
   overflow-x: hidden;
 }
+
+        #description{
+          margin-top: 20px
+        }
+
         .nav {
           display: flex;
           justify-content: space-between;
@@ -107,6 +140,12 @@ body{
             margin-left: 5%;
         }
 
+        #vwrapper{
+          width: 50%;
+          margin: auto;
+          text-align: center
+        }
+
         #home{
             width: 100%;
             height: 100%;
@@ -120,6 +159,15 @@ body{
             border: 1px solid blue;
 
         }
+
+        #aside-left{
+          width: 70%;
+          height: 100vh;
+          background-color: white;
+          float: right;
+          border: 1px solid blue;
+
+      }
 
         .centers{
             margin: auto;
