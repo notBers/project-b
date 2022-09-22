@@ -304,9 +304,7 @@ function InClassStudent(props){
         <header>
             <nav class="nav">
               <Link to = '/Home/Classes' className="logo">{'<-'}</Link>
-              <div class="nav__link hide">
-                 <Link to={'Professor'} state={{id: props.id}}>Professor</Link>
-              </div>
+
             </nav>
           </header>
 

@@ -54,7 +54,7 @@ function StudentsSuccesful(props){
              </nav>
            </header>
  
-           <div id='container'>{students?.sort().map(e=><div className='results'><Link className='inresults' to={`/messages/${e}`}>{e}</Link></div>)}</div>
+           <div id='container'>{students?.sort().map(e=><div className='results'>{e}</div>)}</div>
  
  
      </section>
@@ -151,26 +151,16 @@ body{
 
           .results{
             overflow-x: hidden;
-            width: 99%;
+            width: 100%;
             border: 2px solid black;
-            height: 200px;
             padding: 10px;  
             font-size: 60px;
-            background-color: rgb(1, 136, 160);
-            margin: 10px auto auto auto;
-            border-radius: 5px;
+            margin: auto auto auto auto;
+            background-color: white
+            
+         
           }
 
-          .results:hover {
-            border-bottom: 3px solid rgb(151, 232, 247);
-            border-radius: 7px;
-            transition: all 0.2s ease;
-          }
-  
-          .results:active {
-            border-bottom: 3px solid rgb(151, 232, 247);
-            background-color: rgb(175, 238, 235)
-          }
           .inresults{
             font-size: 60px;
             color: black;
