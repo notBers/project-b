@@ -21,7 +21,7 @@ function ToolsNav(){
                      <div className='division'><Link to={'Math'}>Math</Link></div>
                      <div className='division'><Link to={'Cites'}>Cites</Link></div>
                      <div className='division'><Link to={'Translator'}>Translator</Link></div>
-                     <div className='division'><Link to={'Dictionaries'}>Dictionaries</Link></div>
+                     <div className='division'><Link to={'Dictionary'}>Dictionary</Link></div>
                      <div className='division'><Link to={'TextCorrector'}>Text corrector</Link></div>
                    </div>
                  

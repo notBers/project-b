@@ -24,6 +24,8 @@ function Navbar(){
                 <Link to={'Classes'}>Classes</Link>
               </div>
             </nav>
+
+            <div id='welcome'>Welcome!!!</div>
           </header>
 
 
@@ -41,7 +43,6 @@ function Navbar(){
   font-family: 'Poppins', sans-serif;
 }
 body{
-
   background-color: #F8F8FF;
   padding-top: 0%;
 }
@@ -108,6 +109,13 @@ body{
         .nav__link a:active {
           border-bottom: 3px solid rgb(151, 232, 247);
           background-color: rgb(175, 238, 235)
+        }
+
+        #welcome{
+          margin: auto;
+          text-align: center;
+          padding: 10%;
+          font-size: 100px;
         }
 
         .hide {
