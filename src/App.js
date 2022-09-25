@@ -192,7 +192,7 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<Navigate to='Home' />} />
+        <Route path="/" element={<Navigate to='Login' />} />
         <Route path="Login" element={<Login />} />
         <Route path="Signup" element={<Signup />} />
         <Route path="/Home/Tools/TextCorrector" element={<TextCorrector signin={localStorage.getItem('islogged')} username={localStorage.getItem('user')}/>}/>
