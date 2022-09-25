@@ -82,7 +82,7 @@ function Login(){
         <Link  to='/Signup'><h2 className='inactive underlineHover'>Sign up</h2></Link>
 
         <div className='fadeIn first'>
-          <img src='logo.svg' id='icon' alt='User Icon'/>
+        
         </div>
         
         <form onSubmit={handleSubmit}>
@@ -167,7 +167,7 @@ function Signup(){
         <a><h2 className='active '>Sign up</h2></a>
 
         <div className='fadeIn first'>
-          <img src='logo.svg' id='icon' alt='User Icon'/>
+          
         </div>
         
         <form onSubmit={handleSubmit}>
