@@ -41,7 +41,7 @@ export function Dictionary(){
                    <Link to = '/Home/Tools' class="logo">{back}</Link>
 
                    <div className="logo">
-                      <h1 id='search'>Search</h1>
+                      <h1 id='search'>Dictionary</h1>
                    </div>
      
                  </nav>
