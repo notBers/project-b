@@ -363,7 +363,7 @@ function InAssignmentStudent(props){
 
             <form onSubmit={handleSubmit}>
               <div id='center'>
-                <textarea id='contents' placeholder="Enter text or description or task" maxLength='10000' value={content} onChange={(e) => setContent(e.target.value)} />
+                <textarea id='contents' placeholder="Enter description or your task" maxLength='10000' value={content} onChange={(e) => setContent(e.target.value)} />
                 <input id='con' type='text' placeholder='submit a link (optional)' value={link} onChange={e => setLink(e.target.value)}/>
                 <input type='submit' id='submit' value='Submit task'/>
               </div>
