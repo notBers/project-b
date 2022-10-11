@@ -19,7 +19,6 @@ function Navbar(){
               </div>
 
               <div class="nav__link hide">
-                <Link to={'Dashboard'}>Dashboard</Link>
                 <Link to={'Tools'}>Tools</Link>
                 <Link to={'Classes'}>Classes</Link>
               </div>

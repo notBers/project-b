@@ -22,7 +22,7 @@ function GroupSucessful(props){
 
     async function fetchData1() {
       var bodys = {name: name, mail: props.username, Students: students}
-      const response = await fetch("http://localhost:3001/NewGroup", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
+      const response = await fetch("http://51.222.30.12:3001/NewGroup", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
       const data = await response.json();
 
       if(data.message == 'Group created'){
@@ -48,7 +48,7 @@ function GroupSucessful(props){
 
     async function fetchData() {
         var bodys = {mail: names}
-        const response = await fetch("http://localhost:3001/UserExists", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
+        const response = await fetch("http://51.222.30.12:3001/UserExists", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
         const data = await response.json();
 
         if(data.message == 'ok'){
@@ -227,7 +227,7 @@ export function NewGroup(props){
 
   async function fetchData() {
       var bodys = {mail: props.username}
-      const response = await fetch("http://localhost:3001/UserExists", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
+      const response = await fetch("http://51.222.30.12:3001/UserExists", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
       const data = await response.json();
 
       if(data.message == 'ok'){

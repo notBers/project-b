@@ -13,7 +13,7 @@ function InClassProffesor(props){
   async function getclasses(a){
             if(a == 0){
               var bodys = {_id: props.id}
-              const response = await fetch("http://localhost:3001/ClassExists", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
+              const response = await fetch("http://51.222.30.12:3001/ClassExists", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
               const data = await response.json();
               const message = data.message;
               if(message == 'error in params'){
@@ -31,7 +31,7 @@ function InClassProffesor(props){
 
 
               var bodys = {Class: props.id}
-              const response2 = await fetch("http://localhost:3001/GetAssignments", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
+              const response2 = await fetch("http://51.222.30.12:3001/GetAssignments", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
               const data2 = await response2.json();
               const message2 = data2.message;
               message2?.map(e=>{
@@ -252,7 +252,7 @@ function InClassStudent(props){
   async function getclasses(a){
             if(a == 0){
               var bodys = {_id: props.id}
-              const response = await fetch("http://localhost:3001/ClassExists", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
+              const response = await fetch("http://51.222.30.12:3001/ClassExists", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
               const data = await response.json();
               const message = data.message;
               if(message == 'error in params'){
@@ -268,7 +268,7 @@ function InClassStudent(props){
 
 
               var bodys = {Class: props.id}
-              const response2 = await fetch("http://localhost:3001/GetAssignments", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
+              const response2 = await fetch("http://51.222.30.12:3001/GetAssignments", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
               const data2 = await response2.json();
               const message2 = data2.message;
               message2?.map(e=>{
@@ -484,7 +484,7 @@ body{
 
     async function fetchData() {
         var bodys = {mail: props.username}
-        const response = await fetch("http://localhost:3001/UserExists", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
+        const response = await fetch("http://51.222.30.12:3001/UserExists", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
         const data = await response.json();
   
         if(data.message == 'ok'){

@@ -15,7 +15,7 @@ function InAssignmentProffesor(props){
   async function getclasses(a){
             if(a == 0){
               var bodys = {_id: props.id}
-              const response = await fetch("http://localhost:3001/AssignmentExists", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
+              const response = await fetch("http://51.222.30.12:3001/AssignmentExists", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
               const data = await response.json();
               const message = data.message;
               if(message == 'error in params'){
@@ -282,7 +282,7 @@ function InAssignmentStudent(props){
   async function getclasses(a){
             if(a == 0){
               var bodys = {_id: props.id}
-              const response = await fetch("http://localhost:3001/AssignmentExists", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
+              const response = await fetch("http://51.222.30.12:3001/AssignmentExists", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
               const data = await response.json();
               const message = data.message;
               if(message == 'error in params'){
@@ -322,7 +322,7 @@ function InAssignmentStudent(props){
 
     async function fetchData1() {
       var bodys = {name: props.username, message: content, link: link, assignment: props.id}
-      const response = await fetch("http://localhost:3001/NewUserAssignment", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
+      const response = await fetch("http://51.222.30.12:3001/NewUserAssignment", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
       const data = await response.json();
 
       if(data.message == 'you already uploaded this task'){
@@ -601,7 +601,7 @@ body{
 
     async function fetchData() {
         var bodys = {mail: props.username}
-        const response = await fetch("http://localhost:3001/UserExists", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
+        const response = await fetch("http://51.222.30.12:3001/UserExists", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
         const data = await response.json();
   
         if(data.message == 'ok'){

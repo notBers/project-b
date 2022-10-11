@@ -20,7 +20,7 @@ function StudentsSuccesful(props){
     async function getclasses(a){
               if(a == 0){
                 var bodys = {name: location.state.group}
-                const response = await fetch("http://localhost:3001/Group", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
+                const response = await fetch("http://51.222.30.12:3001/Group", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
                 const data = await response.json();
                 const message = data.message;
                 const student = message[0].Students
@@ -209,7 +209,7 @@ export function Students(props){
 
     async function fetchData() {
         var bodys = {mail: props.username}
-        const response = await fetch("http://localhost:3001/UserExists", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
+        const response = await fetch("http://51.222.30.12:3001/UserExists", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
         const data = await response.json();
 
         if(data.message == 'ok'){

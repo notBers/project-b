@@ -15,7 +15,7 @@ export function Bibliographies(){
   
       async function fetchData() {
         var bodys = {engine: 'engine=google_scholar_cite', q: search }
-        const response = await fetch("http://localhost:3001/Cite", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
+        const response = await fetch("http://51.222.30.12:3001/Cite", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
         const data = await response.json();
         var res;
         var fmap;

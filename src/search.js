@@ -19,7 +19,7 @@ export function Search(){
 
     async function fetchData() {
       var bodys = {engine: (type+'&'), q: search.replaceAll(' ', '+') }
-      const response = await fetch("http://localhost:3001/Scholar", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
+      const response = await fetch("http://51.222.30.12:3001/Scholar", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
       const data = await response.json();
       var counter = 1;
       var res;

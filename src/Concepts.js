@@ -20,7 +20,7 @@ export function Concepts(){
 
     async function fetchData() {
       var bodys = {page: search}
-      const response = await fetch("http://localhost:3001/GetConcept", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
+      const response = await fetch("http://51.222.30.12:3001/GetConcept", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
       const data = await response.json();
       setOutput(data.response)
       setTitle(data.responsee)

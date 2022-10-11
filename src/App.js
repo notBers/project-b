@@ -33,11 +33,12 @@ function Login(){
     if (mail == '') return
     if (password == '') return
 
+    
     async function Login(){
 
       if(role == 'Student'){
         var bodys = {mail: mail, password: password}
-        const response = await fetch("http://localhost:3001/Login", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
+        const response = await fetch("http://51.222.30.12:3001/Login", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
         const message = await response.json()
         if(message.message == "ok"){
           localStorage.setItem('islogged', "true")
@@ -53,7 +54,7 @@ function Login(){
       }else{
 
         var bodys = {mail: mail, password: password}
-        const response = await fetch("http://localhost:3001/LoginTeacher", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
+        const response = await fetch("http://51.222.30.12:3001/LoginTeacher", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
         const message = await response.json()
         if(message.message == "Invalid credentials"){
           localStorage.setItem('islogged', 'false')
@@ -122,7 +123,7 @@ function Signup(){
 
       if(role == 'Student'){
         var bodys = {mail: mail, name: name, password: password}
-        const response = await fetch("http://localhost:3001/RegisterUser", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
+        const response = await fetch("http://51.222.30.12:3001/RegisterUser", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
         const message = await response.json()
         if(message.message == "User already exists"){
           localStorage.setItem('islogged', 'false')
@@ -137,7 +138,7 @@ function Signup(){
       }else{
 
         var bodys = {mail: mail, name: name, password: password}
-        const response = await fetch("http://localhost:3001/RegisterTeacher", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
+        const response = await fetch("http://51.222.30.12:3001/RegisterTeacher", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
         const message = await response.json()
         
         if(message.message == "Professor already exists"){

@@ -25,7 +25,7 @@ function StudentsSuccesful(props){
     async function getclasses(a){
               if(a == 0){
                 var bodys = {name: location.state.id}
-                const response = await fetch("http://localhost:3001/StudentsWork", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
+                const response = await fetch("http://51.222.30.12:3001/StudentsWork", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
                 const data = await response.json();
                 const message = data.students;
                 const student = message;
@@ -50,7 +50,7 @@ function StudentsSuccesful(props){
     const onclick = async (e) => {
       setName(e.target.value)
       var bodys = {name: location.state.id, username: e.target.value}
-      const response = await fetch("http://localhost:3001/StudentWork", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
+      const response = await fetch("http://51.222.30.12:3001/StudentWork", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
       const data = await response.json();
       const message = data.students;
       const student = message;
@@ -62,7 +62,7 @@ function StudentsSuccesful(props){
 
     const onSubmit = async (e) => {
       var bodys = {mark: mark, name: name, assignment: location.state.id }
-      const response = await fetch("http://localhost:3001/StudentWorkMark", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
+      const response = await fetch("http://51.222.30.12:3001/StudentWorkMark", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
       const data = await response.json();
       const message = data.students;
       const student = message;
@@ -284,7 +284,7 @@ export function StudentsWork(props){
 
     async function fetchData() {
         var bodys = {mail: props.username}
-        const response = await fetch("http://localhost:3001/UserExists", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
+        const response = await fetch("http://51.222.30.12:3001/UserExists", {method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(bodys)});
         const data = await response.json();
 
         if(data.message == 'ok'){
